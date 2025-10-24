@@ -67,6 +67,12 @@ for (let item of items) {
     }
 }
 
+// Load win screen image
+winImage = loadImageFromURL('images/lv_sphere.png', 'winImage');
+winImage.onload = function() {
+    winImageLoaded = true;
+};
+
 function setup() {
     let canvas = createCanvas(800, 750);
     canvas.parent('sketch-container');
@@ -249,15 +255,30 @@ function draw() {
     fill(34, 197, 94, 240);
     noStroke();
     rect(0, 0, width, height);
-    
-    fill(255);
+
+    // Draw win image/trophy if loaded
+    if (winImage && winImageLoaded) {
+        try {
+        drawingContext.drawImage(winImage, width / 2 - 250, height / 2 - 300, 500, 281);
+        } catch(e) {
+        // If image fails, show trophy emoji
+        textSize(80);
+        text('🏆', width / 2, height / 2 - 80);
+        }
+    } else {
+        // Fallback trophy emoji while loading
+        textSize(80);
+        text('🏆', width / 2, height / 2 - 80);
+    }
+
+    fill(255, 0, 0);
     textAlign(CENTER, CENTER);
     textSize(48);
     textStyle(BOLD);
-    text('🎉 YOU WIN! 🎉', width / 2, height / 2 - 40);
+    text('🚨 TRUTH REVEALED! 🚨', width / 2, height / 2 - 40);
     textStyle(NORMAL);
     textSize(24);
-    text('All matches correct!', width / 2, height / 2 + 20);
+    text('Conspiracy: The Las Vegas Sphere is flat', width / 2, height / 2 + 20);
     //textSize(20);
     //text('Final Score: ' + score + ' points', width / 2, height / 2 + 60);
     textSize(16);
@@ -269,6 +290,20 @@ function draw() {
     fill(239, 68, 68, 240);
     noStroke();
     rect(0, 0, width, height);
+
+    if (winImage && winImageLoaded) {
+        try {
+        drawingContext.drawImage(winImage, width / 2 - 250, height / 2 - 300, 500, 281);
+        } catch(e) {
+        // If image fails, show trophy emoji
+        textSize(80);
+        text('🏆', width / 2, height / 2 - 80);
+        }
+    } else {
+        // Fallback trophy emoji while loading
+        textSize(80);
+        text('🏆', width / 2, height / 2 - 80);
+    }
     
     fill(255);
     textAlign(CENTER, CENTER);
@@ -277,11 +312,16 @@ function draw() {
     text('💔 GAME OVER 💔', width / 2, height / 2 - 40);
     textStyle(NORMAL);
     textSize(24);
-    text('No tries remaining', width / 2, height / 2 + 20);
-    textSize(20);
-    text('Score: ' + score + ' points', width / 2, height / 2 + 60);
+    text('Conspiracy: The Las Vegas Sphere is flat', width / 2, height / 2 + 20);
     textSize(16);
-    text('Press R to try again', width / 2, height / 2 + 100);
+    text('Circles: evil eye, oreo, sacagawea dollar, ferris wheel', width / 2, height / 2 + 60);
+    text('Las Vegas: elvis, neon sign, welcome sign, slot machine', width / 2, height / 2 + 80);
+    text('Satellite: sputnik, edwin hubble, the moon, the dave matthews band', width / 2, height / 2 + 100);
+    text('Flat: gingerbread cookie, $2 bill, roadkill, mousepad', width / 2, height / 2 + 120);
+    // textSize(20);
+    // text('Score: ' + score + ' points', width / 2, height / 2 + 60);
+    textSize(16);
+    text('Press R to play again', width / 2, height / 2 + 200);
     }
     
     // Instructions at bottom
@@ -385,7 +425,7 @@ function submitChain() {
     // Correct! Add to completed chains
     completedChains.push([...currentChain]);
     score += 50;
-    feedback = { message: '✓ Getting closer to the TRUTH!', correct: true };
+    feedback = { message: '✓ Getting closer...', correct: true };
     feedbackTimer = millis() + 2000;
     currentChain = [];
     

@@ -9,7 +9,7 @@ let items = [
     // Planets - 2 text, 2 images
     { text: '🔴', isImage: true, isURL: false, x: 200, y: 220, group: 'planets', w: 85, h: 50, label: 'Mars' },
     { text: 'Venus', isImage: false, x: 680, y: 320, group: 'planets', w: 85, h: 50 },
-    { text: '🪐', isImage: true, isURL: false, x: 50, y: 130, group: 'planets', w: 85, h: 50, label: 'Saturn' },
+    { text: 'oreo', isImage: true, isURL: true, url: 'images/oreo.png', x: 50, y: 130, group: 'planets', w: 85, h: 50, label: 'Saturn' },
     { text: 'Jupiter', isImage: false, x: 520, y: 260, group: 'planets', w: 85, h: 50 },
     
     // Instruments - 2 text, 2 images
@@ -78,22 +78,22 @@ function draw() {
     background(250);
     
     // Title at top
-    fill(102, 126, 234);
+    fill(0);
     textAlign(CENTER, TOP);
-    textSize(32);
+    textSize(42);
     textStyle(BOLD);
-    text('MATCHING GAME', width / 2, 15);
+    text('UNCOVERUPS', width / 2, 15);
     textStyle(NORMAL);
     
     // Draw score and stats
-    fill(0);
-    textAlign(LEFT, TOP);
-    textSize(20);
-    text('Score: ' + score, 10, 60);
+    // fill(0);
+    // textAlign(LEFT, TOP);
+    // textSize(20);
+    // text('Score: ' + score, 10, 60);
     
-    textSize(14);
-    text('Correct chains: ' + completedChains.length + ' / 4', 10, 90);
-    text('Current chain: ' + currentChain.length + ' / 4 items', 10, 110);
+    // textSize(14);
+    // text('Correct chains: ' + completedChains.length + ' / 4', 10, 90);
+    // text('Current chain: ' + currentChain.length + ' / 4 items', 10, 110);
     
     // Draw tries remaining (hearts)
     textAlign(RIGHT, TOP);
@@ -133,7 +133,7 @@ function draw() {
     
     // Draw current chain connections (blue, not yet verified)
     strokeWeight(3);
-    stroke(102, 126, 234);
+    stroke(255, 0, 0); // orig: 102, 126, 234
     for (let i = 0; i < currentChain.length - 1; i++) {
     let fromCenter = getCenter(currentChain[i]);
     let toCenter = getCenter(currentChain[i + 1]);
@@ -142,7 +142,7 @@ function draw() {
     
     // Draw dragging line
     if (dragging) {
-    stroke(102, 126, 234);
+    stroke(255, 0, 0); // orig: 102, 126, 234
     strokeWeight(2);
     drawingContext.setLineDash([5, 5]);
     let fromCenter = getCenter(dragging);
@@ -296,10 +296,10 @@ function draw() {
     
     fill(50);
     textSize(13);
-    text('• Connect 4 related items, then click SUBMIT to check if correct', 20, 645);
-    text('• Correct chain = +50 pts and turns green, Wrong = -20 pts, lose a try, and resets', 20, 665);
-    text('• Complete 4 correct chains to win! You have 4 tries total.', 20, 685);
-    text('• Press \'R\' to reset game, \'U\' to undo last connection', 20, 705);
+    text('• Connect 4 related items, then click SUBMIT to check if correct', 20, 655);
+    // text('• Correct chains turns green, Wrong = -20 pts, lose a try, and resets', 20, 665);
+    text('• Complete 4 correct chains to win! You have 4 tries total.', 20, 675);
+    text('• Press \'R\' to reset game, \'U\' to undo last connection', 20, 695);
 }
 
 function mousePressed() {

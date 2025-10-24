@@ -9,7 +9,7 @@ let items = [
     // Planets - 2 text, 2 images
     { text: '🔴', isImage: true, isURL: false, x: 200, y: 220, group: 'planets', w: 85, h: 50, label: 'Mars' },
     { text: 'Venus', isImage: false, x: 680, y: 320, group: 'planets', w: 85, h: 50 },
-    { text: 'oreo', isImage: true, isURL: true, url: 'images/oreo.png', x: 50, y: 130, group: 'planets', w: 85, h: 50, label: 'Saturn' },
+    { text: 'oreo', isImage: true, isURL: true, url: 'images/oreo.png', x: 50, y: 130, group: 'planets', w: 85, h: 50, label: 'Saturn' }, // does this work?
     { text: 'Jupiter', isImage: false, x: 520, y: 260, group: 'planets', w: 85, h: 50 },
     
     // Instruments - 2 text, 2 images

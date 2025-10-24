@@ -336,7 +336,7 @@ function draw() {
     
     fill(50);
     textSize(13);
-    text('• Connect 4 related items, then click SUBMIT to check if correct', 20, 655);
+    text('• Click and drag to connect 4 related items, then click SUBMIT to check if correct', 20, 655);
     // text('• Correct chains turns green, Wrong = -20 pts, lose a try, and resets', 20, 665);
     text('• Complete 4 correct chains to win! You have 4 tries total.', 20, 675);
     text('• Press \'R\' to reset game, \'U\' to undo last connection', 20, 695);

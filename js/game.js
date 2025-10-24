@@ -1,28 +1,28 @@
 // Game state - mix of text and emoji/symbols as images
 let items = [
-    // Seasons - 2 text, 2 images
-    { text: 'Spring', isImage: false, x: 120, y: 320, group: 'seasons', w: 85, h: 50 },
-    { text: 'sun', isImage: true, isURL: true, url: 'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1MTIgNTEyIj48cGF0aCBmaWxsPSIjRkZEQzNCIiBkPSJNMjU2IDEyOGMtNzAuNyAwLTEyOCA1Ny4zLTEyOCAxMjhzNTcuMyAxMjggMTI4IDEyOCAxMjgtNTcuMyAxMjgtMTI4LTU3LjMtMTI4LTEyOC0xMjh6bTAgMjA4Yy00NC4yIDAtODAtMzUuOC04MC04MHMzNS44LTgwIDgwLTgwIDgwIDM1LjggODAgODAtMzUuOCA4MC04MCA4MHptMC0zMjBjMTMuMyAwIDI0LTEwLjcgMjQtMjRWMjRjMC0xMy4zLTEwLjctMjQtMjQtMjRzLTI0IDEwLjctMjQgMjR2NjhjMCAxMy4zIDEwLjcgMjQgMjQgMjR6bTE3MS4yIDk3LjZjOS40LTkuNCA5LjQtMjQuNiAwLTMzLjlsLTQ4LTQ4Yy05LjQtOS40LTI0LjYtOS40LTMzLjkgMHMtOS40IDI0LjYgMCAzMy45bDQ4IDQ4YzQuNyA0LjcgMTAuOCA3IDEwLjggN3M2LjItMi4zIDEwLjktN3pNNDg4IDIzMmgtNjhjLTEzLjMgMC0yNCAxMC43LTI0IDI0czEwLjcgMjQgMjQgMjRoNjhjMTMuMyAwIDI0LTEwLjcgMjQtMjRzLTEwLjctMjQtMjQtMjR6bS02MC42IDE0OC44Yy05LjQtOS40LTI0LjYtOS40LTMzLjkgMHMtOS40IDI0LjYgMCAzMy45bDQ4IDQ4YzQuNyA0LjcgMTAuOCA3IDE2Ljk2IDdzMTIuMy0yLjMgMTYuOTYtN2M5LjQtOS40IDkuNC0yNC42IDAtMzMuOWwtNDgtNDh6TTI1NiA0MTZjLTEzLjMgMC0yNCAxMC43LTI0IDI0djY4YzAgMTMuMyAxMC43IDI0IDI0IDI0czI0LTEwLjcgMjQtMjR2LTY4YzAtMTMuMy0xMC43LTI0LTI0LTI0em0tMTU1LjItMzUuMmMtOS40LTkuNC0yNC42LTkuNC0zMy45IDBsLTQ4IDQ4Yy05LjQgOS40LTkuNCAyNC42IDAgMzMuOSA0LjcgNC43IDEwLjggNyAxNi45NiA3czEyLjMtMi4zIDE2Ljk2LTdsNDgtNDhjOS40LTkuNCA5LjQtMjQuNiAwLTMzLjl6TTkyIDI1NmMwLTEzLjMtMTAuNy0yNC0yNC0yNEgyNGMtMTMuMyAwLTI0IDEwLjctMjQgMjRzMTAuNyAyNCAyNCAyNGg0NGMxMy4zIDAgMjQtMTAuNyAyNC0yNHptOC44LTE3NC4yYy05LjQtOS40LTI0LjYtOS40LTMzLjkgMGwtNDggNDhjLTkuNCA5LjQtOS40IDI0LjYgMCAzMy45IDQuNyA0LjcgMTAuOCA3IDE2Ljk2IDdzMTIuMy0yLjMgMTYuOTYtN2w0OC00OGM5LjQtOS40IDkuNC0yNC42IDAtMzMuOXoiLz48L3N2Zz4=', x: 580, y: 190, group: 'seasons', w: 85, h: 50, label: 'Summer' },
-    { text: 'Autumn', isImage: false, x: 320, y: 130, group: 'seasons', w: 85, h: 50 },
-    { text: '❄️', isImage: true, isURL: false, x: 450, y: 360, group: 'seasons', w: 85, h: 50, label: 'Winter' },
+    // Vegas - 1 text, 3 images
+    { text: 'elvis', isImage: true, isURL: true, url: 'images/elvis.png', x: 120, y: 320, group: 'vegas', w: 85, h: 50, label: 'Elvis' },
+    { text: 'welcome', isImage: true, isURL: true, url: 'images/welcome.png', x: 580, y: 190, group: 'vegas', w: 85, h: 50, label: 'Welcome' },
+    { text: 'Neon Sign', isImage: false, x: 320, y: 130, group: 'vegas', w: 85, h: 50 },
+    { text: 'slot', isImage: true, isURL: true, url: 'images/slots.png', x: 495, y: 360, group: 'vegas', w: 85, h: 50, label: 'Slot Machine' },
     
-    // Planets - 2 text, 2 images
-    { text: '🔴', isImage: true, isURL: false, x: 200, y: 220, group: 'planets', w: 85, h: 50, label: 'Mars' },
-    { text: 'Venus', isImage: false, x: 680, y: 320, group: 'planets', w: 85, h: 50 },
-    { text: 'oreo', isImage: true, isURL: true, url: 'images/oreo.png', x: 50, y: 130, group: 'planets', w: 85, h: 50, label: 'Saturn' }, // does this work?
-    { text: 'Jupiter', isImage: false, x: 520, y: 260, group: 'planets', w: 85, h: 50 },
+    // Circles - 2 text, 2 images
+    { text: 'sacagawea', isImage: true, isURL: true, url: 'images/sacagawea.png', x: 200, y: 220, group: 'circles', w: 85, h: 50, label: 'Sacagawea Dollar' },
+    { text: 'Ferris Wheel', isImage: false, x: 680, y: 320, group: 'circles', w: 95, h: 50 },
+    { text: 'oreo', isImage: true, isURL: true, url: 'images/oreo.png', x: 50, y: 130, group: 'circles', w: 85, h: 50, label: 'Oreo' },
+    { text: 'Evil Eye', isImage: false, x: 520, y: 260, group: 'circles', w: 85, h: 50 },
     
-    // Instruments - 2 text, 2 images
-    { text: 'Piano', isImage: false, x: 380, y: 220, group: 'instruments', w: 85, h: 50 },
-    { text: '🎸', isImage: true, isURL: false, x: 150, y: 420, group: 'instruments', w: 85, h: 50, label: 'Guitar' },
-    { text: '🎻', isImage: true, isURL: false, x: 620, y: 130, group: 'instruments', w: 85, h: 50, label: 'Violin' },
-    { text: 'Drums', isImage: false, x: 290, y: 360, group: 'instruments', w: 85, h: 50 },
+    // Satellite - 2 text, 2 images
+    { text: 'Edwin Hubble', isImage: false, x: 380, y: 220, group: 'satellite', w: 100, h: 50 },
+    { text: 'sputnik', isImage: true, isURL: true, url: 'images/sputnik.png', x: 150, y: 420, group: 'satellite', w: 85, h: 50, label: 'Sputnik' },
+    { text: 'moon', isImage: true, isURL: true, url: 'images/moon.png', x: 620, y: 130, group: 'satellite', w: 85, h: 50, label: 'The Moon' },
+    { text: 'The Dave Matthews Band', isImage: false, x: 290, y: 340, group: 'satellite', w: 175, h: 50 },
     
-    // Fruits - 2 text, 2 images
-    { text: '🍎', isImage: true, isURL: false, x: 480, y: 130, group: 'fruits', w: 85, h: 50, label: 'Apple' },
-    { text: 'Banana', isImage: false, x: 50, y: 260, group: 'fruits', w: 85, h: 50 },
-    { text: '🍊', isImage: true, isURL: false, x: 340, y: 420, group: 'fruits', w: 85, h: 50, label: 'Orange' },
-    { text: 'Grape', isImage: false, x: 680, y: 220, group: 'fruits', w: 85, h: 50 }
+    // Flat - 2 text, 2 images
+    { text: 'gingerbread', isImage: true, isURL: true, url: 'images/ginger_cookie.png', x: 480, y: 130, group: 'flat', w: 85, h: 50, label: 'Gingerbread Man' },
+    { text: 'Roadkill', isImage: false, x: 50, y: 260, group: 'flat', w: 85, h: 50 },
+    { text: 'two_dollar', isImage: true, isURL: true, url: 'images/two_dollar.png', x: 340, y: 420, group: 'flat', w: 85, h: 50, label: '$2 Bill' },
+    { text: 'Mousepad', isImage: false, x: 680, y: 220, group: 'flat', w: 85, h: 50 }
 ];
 
 let imageCache = {};
@@ -258,8 +258,8 @@ function draw() {
     textStyle(NORMAL);
     textSize(24);
     text('All matches correct!', width / 2, height / 2 + 20);
-    textSize(20);
-    text('Final Score: ' + score + ' points', width / 2, height / 2 + 60);
+    //textSize(20);
+    //text('Final Score: ' + score + ' points', width / 2, height / 2 + 60);
     textSize(16);
     text('Press R to play again', width / 2, height / 2 + 100);
     }
@@ -385,7 +385,7 @@ function submitChain() {
     // Correct! Add to completed chains
     completedChains.push([...currentChain]);
     score += 50;
-    feedback = { message: '✓ Correct! +50 points', correct: true };
+    feedback = { message: '✓ Getting closer to the TRUTH!', correct: true };
     feedbackTimer = millis() + 2000;
     currentChain = [];
     
@@ -399,7 +399,7 @@ function submitChain() {
     // Incorrect! Lose a try and reset current chain
     triesRemaining--;
     score = max(0, score - 20);
-    feedback = { message: '✗ Incorrect match! -20 points', correct: false };
+    feedback = { message: '✗ Dead End! Try again', correct: false };
     feedbackTimer = millis() + 2000;
     currentChain = [];
     

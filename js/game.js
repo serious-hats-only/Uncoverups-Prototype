@@ -29,6 +29,7 @@ let imageCache = {};
 let imageLoadStatus = {};
 
 let completedChains = []; // Verified correct chains
+let completedCategories = []; // Names of completed categories
 let currentChain = [];
 let dragging = null;
 let dragX = 0;
@@ -323,6 +324,27 @@ function draw() {
     textSize(16);
     text('Press R to play again', width / 2, height / 2 + 200);
     }
+
+    // Draw completed categories list (bottom right)
+    if (completedCategories.length > 0) {
+    fill(240, 244, 255);
+    noStroke();
+    let boxHeight = 40 + (completedCategories.length * 25);
+    rect(width - 180, height - boxHeight - 160, 170, boxHeight, 8);
+    
+    fill(102, 126, 234);
+    textAlign(LEFT, TOP);
+    textSize(14);
+    textStyle(BOLD);
+    text('Completed:', width - 170, height - boxHeight - 150);
+    textStyle(NORMAL);
+    
+    fill(34, 197, 94);
+    textSize(13);
+    for (let i = 0; i < completedCategories.length; i++) {
+        text('✓ ' + completedCategories[i], width - 170, height - boxHeight - 125 + (i * 25));
+        }
+    }
     
     // Instructions at bottom
     fill(240, 244, 255);
@@ -424,6 +446,9 @@ function submitChain() {
     if (isCorrect) {
     // Correct! Add to completed chains
     completedChains.push([...currentChain]);
+    // Add category name to completed list (capitalize first letter)
+    let categoryName = firstGroup.charAt(0).toUpperCase() + firstGroup.slice(1);
+    completedCategories.push(categoryName);
     score += 50;
     feedback = { message: '✓ Getting closer...', correct: true };
     feedbackTimer = millis() + 2000;
@@ -455,6 +480,7 @@ function submitChain() {
 function keyPressed() {
     if (key === 'r' || key === 'R') {
     completedChains = [];
+    completedCategories = [];
     currentChain = [];
     score = 0;
     feedback = null;

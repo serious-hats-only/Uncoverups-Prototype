@@ -1,28 +1,28 @@
 // Game state - mix of text and emoji/symbols as images
 let items = [
-    // Vegas - 1 text, 3 images
+    // Vegas - 1 text, 2 images
     { text: 'elvis', isImage: true, isURL: true, url: 'images/elvis.png', x: 120, y: 320, group: 'vegas', w: 85, h: 50, label: 'Elvis' },
-    { text: 'welcome', isImage: true, isURL: true, url: 'images/welcome.png', x: 580, y: 190, group: 'vegas', w: 85, h: 50, label: 'Welcome' },
-    { text: 'Neon Sign', isImage: false, x: 320, y: 130, group: 'vegas', w: 85, h: 50 },
+    // { text: 'welcome', isImage: true, isURL: true, url: 'images/welcome.png', x: 580, y: 190, group: 'vegas', w: 85, h: 50, label: 'Welcome' },
+    { text: 'Neon', isImage: false, x: 320, y: 130, group: 'vegas', w: 85, h: 50 },
     { text: 'slot', isImage: true, isURL: true, url: 'images/slots.png', x: 495, y: 360, group: 'vegas', w: 85, h: 50, label: 'Slot Machine' },
     
-    // Circles - 2 text, 2 images
-    { text: 'sacagawea', isImage: true, isURL: true, url: 'images/sacagawea.png', x: 200, y: 220, group: 'circles', w: 85, h: 50, label: 'Sacagawea Dollar' },
-    { text: 'Ferris Wheel', isImage: false, x: 680, y: 320, group: 'circles', w: 95, h: 50 },
+    // Circles - 1 text, 2 images
+    { text: 'moon', isImage: true, isURL: true, url: 'images/moon.png', x: 200, y: 220, group: 'circles', w: 85, h: 50, label: 'The Moon' },
+    // { text: 'Ferris Wheel', isImage: false, x: 680, y: 320, group: 'circles', w: 95, h: 50 },
     { text: 'oreo', isImage: true, isURL: true, url: 'images/oreo.png', x: 50, y: 130, group: 'circles', w: 85, h: 50, label: 'Oreo' },
     { text: 'Evil Eye', isImage: false, x: 520, y: 260, group: 'circles', w: 85, h: 50 },
     
     // Satellite - 2 text, 2 images
-    { text: 'Edwin Hubble', isImage: false, x: 380, y: 220, group: 'satellite', w: 100, h: 50 },
-    { text: 'sputnik', isImage: true, isURL: true, url: 'images/sputnik.png', x: 150, y: 420, group: 'satellite', w: 85, h: 50, label: 'Sputnik' },
-    { text: 'moon', isImage: true, isURL: true, url: 'images/moon.png', x: 620, y: 130, group: 'satellite', w: 85, h: 50, label: 'The Moon' },
-    { text: 'The Dave Matthews Band', isImage: false, x: 290, y: 340, group: 'satellite', w: 175, h: 50 },
+    // { text: 'Edwin Hubble', isImage: false, x: 380, y: 220, group: 'satellite', w: 100, h: 50 },
+    // { text: 'sputnik', isImage: true, isURL: true, url: 'images/sputnik.png', x: 150, y: 420, group: 'satellite', w: 85, h: 50, label: 'Sputnik' },
+    // { text: 'moon', isImage: true, isURL: true, url: 'images/moon.png', x: 620, y: 130, group: 'satellite', w: 85, h: 50, label: 'The Moon' },
+    // { text: 'The Dave Matthews Band', isImage: false, x: 290, y: 340, group: 'satellite', w: 175, h: 50 },
     
-    // Flat - 2 text, 2 images
+    // Flat - 2 text, 1 images
     { text: 'gingerbread', isImage: true, isURL: true, url: 'images/ginger_cookie.png', x: 480, y: 130, group: 'flat', w: 85, h: 50, label: 'Gingerbread Man' },
     { text: 'Roadkill', isImage: false, x: 50, y: 260, group: 'flat', w: 85, h: 50 },
-    { text: 'two_dollar', isImage: true, isURL: true, url: 'images/two_dollar.png', x: 340, y: 420, group: 'flat', w: 85, h: 50, label: '$2 Bill' },
-    { text: 'Mousepad', isImage: false, x: 680, y: 220, group: 'flat', w: 85, h: 50 }
+    // { text: 'two_dollar', isImage: true, isURL: true, url: 'images/two_dollar.png', x: 340, y: 420, group: 'flat', w: 85, h: 50, label: '$2 Bill' },
+    { text: 'UK Apartment', isImage: false, x: 680, y: 220, group: 'flat', w: 85, h: 50 }
 ];
 
 let imageCache = {};
@@ -39,8 +39,16 @@ let feedback = null;
 let feedbackTimer = 0;
 let gameWon = false;
 let gameLost = false;
-let triesRemaining = 4;
+let triesRemaining = 3; // 4 LINE
 let submitButton = { x: 350, y: 545, w: 100, h: 40 };
+
+// Placeholder image for description box
+let placeholderImage = null;
+let placeholderImageLoaded = false;
+
+// Win screen trophy image
+let winImage = null;
+let winImageLoaded = false;
 
 // Load images using native JavaScript instead of p5.js preload
 function loadImageFromURL(url, key) {
@@ -74,6 +82,12 @@ winImage.onload = function() {
     winImageLoaded = true;
 };
 
+// Load placeholder image for description box (puzzle piece icon)
+placeholderImage = loadImageFromURL('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1MTIgNTEyIj48cGF0aCBmaWxsPSIjNjY3ZWVhIiBkPSJNMjg4IDMyYzAtMTcuNy0xNC4zLTMyLTMyLTMycy0zMiAxNC4zLTMyIDMyVjI0MGMwIDE3LjcgMTQuMyAzMiAzMiAzMnMzMi0xNC4zIDMyLTMyVjMyem0wIDQ0OGMwIDE3LjcgMTQuMyAzMiAzMiAzMnMzMi0xNC4zIDMyLTMyVjI3MmMwLTE3LjctMTQuMy0zMi0zMi0zMnMtMzIgMTQuMy0zMiAzMlY0ODB6TTMyIDI4OGMtMTcuNyAwLTMyIDE0LjMtMzIgMzJzMTQuMyAzMiAzMiAzMkgyNDBjMTcuNyAwIDMyLTE0LjMgMzItMzJzLTE0LjMtMzItMzItMzJIMzJ6bTQ0OCAwSDE2MGMtMTcuNyAwLTMyIDE0LjMtMzIgMzJzMTQuMyAzMiAzMiAzMkg0ODBjMTcuNyAwIDMyLTE0LjMgMzItMzJzLTE0LjMtMzItMzItMzJ6Ii8+PC9zdmc+', 'placeholderImage');
+placeholderImage.onload = function() {
+    placeholderImageLoaded = true;
+};
+
 function setup() {
     let canvas = createCanvas(800, 750);
     canvas.parent('sketch-container');
@@ -91,7 +105,67 @@ function draw() {
     textStyle(BOLD);
     text('UNCOVERUPS', width / 2, 15);
     textStyle(NORMAL);
+
+    // Description box with image - light orange horizontal box
+    let descBoxWidth = width * 0.6; // 60% of canvas width
+    let descBoxHeight = 60;
+    let descBoxX = width * 0.2; // Centered (20% from left)
+    let descBoxY = 55;
     
+    // Main description box (light orange)
+    fill(255, 220, 180);
+    noStroke();
+    rect(descBoxX, descBoxY, descBoxWidth, descBoxHeight, 8);
+    
+    // Description text
+    fill(80);
+    noStroke();
+    textAlign(LEFT, CENTER);
+    textSize(16);
+    text('Here is a game about matching.', descBoxX + 90, descBoxY + descBoxHeight / 2);
+    
+    // Image box overlapping left side - ROTATED
+    let imageBoxSize = 80;
+    let imageBoxX = descBoxX - 20; // Overlaps by 20px
+    let imageBoxY = descBoxY - 10; // Slightly above
+    
+    push(); // Save current transformation state
+    translate(imageBoxX + imageBoxSize / 2, imageBoxY + imageBoxSize / 2); // Move to center of box
+    rotate(radians(-10)); // Rotate 10 degrees counterclockwise
+    
+    // Image box shadow
+    fill(0, 0, 0, 30);
+    noStroke();
+    rect(-imageBoxSize / 2 + 3, -imageBoxSize / 2 + 3, imageBoxSize, imageBoxSize, 8);
+    
+    // Image box background
+    fill(255);
+    stroke(102, 126, 234);
+    strokeWeight(3);
+    rect(-imageBoxSize / 2, -imageBoxSize / 2, imageBoxSize, imageBoxSize, 8);
+    
+    // Draw placeholder image or icon
+    noStroke();
+    if (placeholderImage && placeholderImageLoaded) {
+    try {
+        drawingContext.drawImage(placeholderImage, -25, -25, 50, 50);
+    } catch(e) {
+        // Fallback to emoji
+        fill(102, 126, 234);
+        textAlign(CENTER, CENTER);
+        textSize(40);
+        text('🧩', 0, 0);
+    }
+    } else {
+    // Fallback puzzle emoji
+    fill(102, 126, 234);
+    textAlign(CENTER, CENTER);
+    textSize(40);
+    text('🧩', 0, 0);
+    }
+    
+    pop(); // Restore transformation state
+
     // Draw score and stats
     // fill(0);
     // textAlign(LEFT, TOP);
@@ -108,7 +182,7 @@ function draw() {
     fill(0);
     text('Tries:', width - 120, 90);
     
-    for (let i = 0; i < 4; i++) {
+    for (let i = 0; i < 3; i++) { // 4 LINE
     textSize(24);
     if (i < triesRemaining) {
         fill(239, 68, 68); // Red heart for remaining tries
@@ -142,19 +216,19 @@ function draw() {
     strokeWeight(3);
     stroke(255, 0, 0); // orig: 102, 126, 234
     for (let i = 0; i < currentChain.length - 1; i++) {
-    let fromCenter = getCenter(currentChain[i]);
-    let toCenter = getCenter(currentChain[i + 1]);
-    line(fromCenter.x, fromCenter.y, toCenter.x, toCenter.y);
+        let fromCenter = getCenter(currentChain[i]);
+        let toCenter = getCenter(currentChain[i + 1]);
+        line(fromCenter.x, fromCenter.y, toCenter.x, toCenter.y);
     }
     
     // Draw dragging line
     if (dragging) {
-    stroke(255, 0, 0); // orig: 102, 126, 234
-    strokeWeight(2);
-    drawingContext.setLineDash([5, 5]);
-    let fromCenter = getCenter(dragging);
-    line(fromCenter.x, fromCenter.y, dragX, dragY);
-    drawingContext.setLineDash([]);
+        stroke(255, 0, 0); // orig: 102, 126, 234
+        strokeWeight(2);
+        drawingContext.setLineDash([5, 5]);
+        let fromCenter = getCenter(dragging);
+        line(fromCenter.x, fromCenter.y, dragX, dragY);
+        drawingContext.setLineDash([]);
     }
     
     // Draw items
@@ -224,12 +298,12 @@ function draw() {
     }
     }
     
-    // Submit button AFTER items so it draws on top (only show when current chain has 4 items)
-    if (currentChain.length === 4 && !gameWon && !gameLost) {
-    let isHovered = mouseX > submitButton.x && 
-                    mouseX < submitButton.x + submitButton.w &&
-                    mouseY > submitButton.y && 
-                    mouseY < submitButton.y + submitButton.h;
+    // Submit button AFTER items so it draws on top (only show when current chain has 3 items)
+    if (currentChain.length === 3 && !gameWon && !gameLost) {
+        let isHovered = mouseX > submitButton.x && 
+                        mouseX < submitButton.x + submitButton.w &&
+                        mouseY > submitButton.y && 
+                        mouseY < submitButton.y + submitButton.h;
     
     // Button shadow
     fill(0, 0, 0, 30);
@@ -358,7 +432,7 @@ function draw() {
     
     fill(50);
     textSize(13);
-    text('• Click and drag to connect 4 related items, then click SUBMIT to check if correct', 20, 655);
+    text('• Click and drag to connect 3 related items, then click SUBMIT to check if correct', 20, 655);
     // text('• Correct chains turns green, Wrong = -20 pts, lose a try, and resets', 20, 665);
     text('• Complete 4 correct chains to win! You have 4 tries total.', 20, 675);
     text('• Press \'R\' to reset game, \'U\' to undo last connection', 20, 695);
@@ -366,7 +440,7 @@ function draw() {
 
 function mousePressed() {
     // Check if clicking submit button
-    if (currentChain.length === 4 && !gameWon && !gameLost &&
+    if (currentChain.length === 3 && !gameWon && !gameLost && // 4 LINE
         mouseX > submitButton.x && 
         mouseX < submitButton.x + submitButton.w &&
         mouseY > submitButton.y && 
@@ -425,8 +499,8 @@ function mouseReleased() {
         
         if (dragging === lastItem) {
         // Must continue from last item in chain
-        // Block if chain already has 4 items
-        if (!currentChain.includes(target) && !targetUsed && currentChain.length < 4) {
+        // Block if chain already has 3 items
+        if (!currentChain.includes(target) && !targetUsed && currentChain.length < 3) { // 4 LINE
             currentChain.push(target);
         }
         }
@@ -437,7 +511,7 @@ function mouseReleased() {
 }
 
 function submitChain() {
-    if (currentChain.length !== 4) return;
+    if (currentChain.length !== 3) return; // 4 LINE
     
     // Check if all items in chain have same group
     let firstGroup = currentChain[0].group;
@@ -455,7 +529,7 @@ function submitChain() {
     currentChain = [];
     
     // Check if game is won
-    if (completedChains.length === 4) {
+    if (completedChains.length === 3) {
         gameWon = true;
         feedback = { message: '🎉 You won! All chains correct!', correct: true };
         feedbackTimer = millis() + 5000;
@@ -486,7 +560,7 @@ function keyPressed() {
     feedback = null;
     gameWon = false;
     gameLost = false;
-    triesRemaining = 4;
+    triesRemaining = 3; // 4 LINE
     } else if (key === 'u' || key === 'U') {
     if (currentChain.length > 0 && !gameWon && !gameLost) {
         currentChain.pop();

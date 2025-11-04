@@ -7,10 +7,10 @@ let items = [
     { text: 'slot', isImage: true, isURL: true, url: 'images/slots.png', x: 495, y: 360, group: 'vegas', w: 85, h: 50, label: 'Slot Machine' },
     
     // Circles - 1 text, 2 images
-    { text: 'moon', isImage: true, isURL: true, url: 'images/moon.png', x: 200, y: 220, group: 'circles', w: 85, h: 50, label: 'The Moon' },
+    { text: 'moon', isImage: true, isURL: true, url: 'images/moon.png', x: 200, y: 220, group: 'sphere', w: 85, h: 50, label: 'The Moon' },
     // { text: 'Ferris Wheel', isImage: false, x: 680, y: 320, group: 'circles', w: 95, h: 50 },
-    { text: 'oreo', isImage: true, isURL: true, url: 'images/oreo.png', x: 50, y: 130, group: 'circles', w: 85, h: 50, label: 'Oreo' },
-    { text: 'Evil Eye', isImage: false, x: 520, y: 260, group: 'circles', w: 85, h: 50 },
+    { text: 'sphere_poster', isImage: true, isURL: true, url: 'images/sphere_poster.png', x: 50, y: 130, group: 'sphere', w: 85, h: 50, label: 'Oreo' },
+    { text: 'Crystal Ball', isImage: false, x: 520, y: 260, group: 'sphere', w: 85, h: 50 },
     
     // Satellite - 2 text, 2 images
     // { text: 'Edwin Hubble', isImage: false, x: 380, y: 220, group: 'satellite', w: 100, h: 50 },
@@ -22,7 +22,7 @@ let items = [
     { text: 'gingerbread', isImage: true, isURL: true, url: 'images/ginger_cookie.png', x: 480, y: 130, group: 'flat', w: 85, h: 50, label: 'Gingerbread Man' },
     { text: 'Roadkill', isImage: false, x: 50, y: 260, group: 'flat', w: 85, h: 50 },
     // { text: 'two_dollar', isImage: true, isURL: true, url: 'images/two_dollar.png', x: 340, y: 420, group: 'flat', w: 85, h: 50, label: '$2 Bill' },
-    { text: 'UK Apartment', isImage: false, x: 680, y: 220, group: 'flat', w: 85, h: 50 }
+    { text: 'UK Apartment', isImage: false, x: 640, y: 220, group: 'flat', w: 125, h: 50 }
 ];
 
 let imageCache = {};
@@ -83,7 +83,7 @@ winImage.onload = function() {
 };
 
 // Load placeholder image for description box (puzzle piece icon)
-placeholderImage = loadImageFromURL('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1MTIgNTEyIj48cGF0aCBmaWxsPSIjNjY3ZWVhIiBkPSJNMjg4IDMyYzAtMTcuNy0xNC4zLTMyLTMyLTMycy0zMiAxNC4zLTMyIDMyVjI0MGMwIDE3LjcgMTQuMyAzMiAzMiAzMnMzMi0xNC4zIDMyLTMyVjMyem0wIDQ0OGMwIDE3LjcgMTQuMyAzMiAzMiAzMnMzMi0xNC4zIDMyLTMyVjI3MmMwLTE3LjctMTQuMy0zMi0zMi0zMnMtMzIgMTQuMy0zMiAzMlY0ODB6TTMyIDI4OGMtMTcuNyAwLTMyIDE0LjMtMzIgMzJzMTQuMyAzMiAzMiAzMkgyNDBjMTcuNyAwIDMyLTE0LjMgMzItMzJzLTE0LjMtMzItMzItMzJIMzJ6bTQ0OCAwSDE2MGMtMTcuNyAwLTMyIDE0LjMtMzIgMzJzMTQuMyAzMiAzMiAzMkg0ODBjMTcuNyAwIDMyLTE0LjMgMzItMzJzLTE0LjMtMzItMzItMzJ6Ii8+PC9zdmc+', 'placeholderImage');
+placeholderImage = loadImageFromURL('images/editor.png', 'placeholderImage');
 placeholderImage.onload = function() {
     placeholderImageLoaded = true;
 };
@@ -108,7 +108,7 @@ function draw() {
 
     // Description box with image - light orange horizontal box
     let descBoxWidth = width * 0.6; // 60% of canvas width
-    let descBoxHeight = 60;
+    let descBoxHeight = 70;
     let descBoxX = width * 0.2; // Centered (20% from left)
     let descBoxY = 55;
     
@@ -121,8 +121,10 @@ function draw() {
     fill(80);
     noStroke();
     textAlign(LEFT, CENTER);
-    textSize(16);
-    text('Here is a game about matching.', descBoxX + 90, descBoxY + descBoxHeight / 2);
+    textSize(14);
+    text('"The global elite want you to believe that certain big, bright', descBoxX + 90, descBoxY + descBoxHeight / 3);
+    text('orbs are completely round. To them I say - wanna bet?"', descBoxX + 90, descBoxY + descBoxHeight / 1.7);
+    text('                           - The Editor', descBoxX + 90, descBoxY + descBoxHeight / 1.1);
     
     // Image box overlapping left side - ROTATED
     let imageBoxSize = 80;
@@ -148,7 +150,7 @@ function draw() {
     noStroke();
     if (placeholderImage && placeholderImageLoaded) {
     try {
-        drawingContext.drawImage(placeholderImage, -25, -25, 50, 50);
+        drawingContext.drawImage(placeholderImage, -33, -27, 65, 65);
     } catch(e) {
         // Fallback to emoji
         fill(102, 126, 234);

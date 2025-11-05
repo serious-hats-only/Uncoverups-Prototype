@@ -101,72 +101,12 @@ function draw() {
     // Title at top
     fill(0);
     textAlign(CENTER, TOP);
-    textSize(42);
+    textFont('Courier New, monospace'); // Set title font to Courier New
+    textSize(62);
     textStyle(BOLD);
     text('UNCOVERUPS', width / 2, 15);
     textStyle(NORMAL);
-
-    // Description box with image - light orange horizontal box
-    let descBoxWidth = width * 0.6; // 60% of canvas width
-    let descBoxHeight = 70;
-    let descBoxX = width * 0.2; // Centered (20% from left)
-    let descBoxY = 55;
-    
-    // Main description box (light orange)
-    fill(255, 220, 180);
-    noStroke();
-    rect(descBoxX, descBoxY, descBoxWidth, descBoxHeight, 8);
-    
-    // Description text
-    fill(80);
-    noStroke();
-    textAlign(LEFT, CENTER);
-    textSize(14);
-    text('"The global elite want you to believe that certain big, bright', descBoxX + 90, descBoxY + descBoxHeight / 3);
-    text('orbs are completely round. To them I say - wanna bet?"', descBoxX + 90, descBoxY + descBoxHeight / 1.7);
-    text('                           - The Editor', descBoxX + 90, descBoxY + descBoxHeight / 1.1);
-    
-    // Image box overlapping left side - ROTATED
-    let imageBoxSize = 80;
-    let imageBoxX = descBoxX - 20; // Overlaps by 20px
-    let imageBoxY = descBoxY - 10; // Slightly above
-    
-    push(); // Save current transformation state
-    translate(imageBoxX + imageBoxSize / 2, imageBoxY + imageBoxSize / 2); // Move to center of box
-    rotate(radians(-10)); // Rotate 10 degrees counterclockwise
-    
-    // Image box shadow
-    fill(0, 0, 0, 30);
-    noStroke();
-    rect(-imageBoxSize / 2 + 3, -imageBoxSize / 2 + 3, imageBoxSize, imageBoxSize, 8);
-    
-    // Image box background
-    fill(255);
-    stroke(102, 126, 234);
-    strokeWeight(3);
-    rect(-imageBoxSize / 2, -imageBoxSize / 2, imageBoxSize, imageBoxSize, 8);
-    
-    // Draw placeholder image or icon
-    noStroke();
-    if (placeholderImage && placeholderImageLoaded) {
-    try {
-        drawingContext.drawImage(placeholderImage, -33, -27, 65, 65);
-    } catch(e) {
-        // Fallback to emoji
-        fill(102, 126, 234);
-        textAlign(CENTER, CENTER);
-        textSize(40);
-        text('🧩', 0, 0);
-    }
-    } else {
-    // Fallback puzzle emoji
-    fill(102, 126, 234);
-    textAlign(CENTER, CENTER);
-    textSize(40);
-    text('🧩', 0, 0);
-    }
-    
-    pop(); // Restore transformation state
+    textFont('Arial'); // Reset to default font
 
     // Draw score and stats
     // fill(0);
@@ -434,10 +374,79 @@ function draw() {
     
     fill(50);
     textSize(13);
-    text('• Click and drag to connect 3 related items, then click SUBMIT to check if correct', 20, 655);
-    // text('• Correct chains turns green, Wrong = -20 pts, lose a try, and resets', 20, 665);
-    text('• Complete 4 correct chains to win! You have 4 tries total.', 20, 675);
-    text('• Press \'R\' to reset game, \'U\' to undo last connection', 20, 695);
+    text('• Click and drag to connect 3 related items', 20, 655);
+    text('• Click SUBMIT to check if correct', 20, 675);
+    text('• Complete 3 correct chains to win! You have 3 tries total.', 20, 695);
+    text('• Press \'R\' to reset game, \'U\' to undo last connection', 20, 715);
+
+    // Description box with image - light orange horizontal box
+    let descBoxWidth = 400;
+    let descBoxHeight = 140;
+    let descBoxX = width - descBoxWidth; // Centered (20% from left)
+    let descBoxY = 610;
+    
+    // Main description box (light orange)
+    fill(255, 220, 180);
+    noStroke();
+    rect(descBoxX, descBoxY, descBoxWidth, descBoxHeight, 8);
+
+    fill(0);
+    textAlign(CENTER, TOP);
+    textSize(16);
+    textStyle(BOLD);
+    text('Message from the Editor', 620, 620);
+    textStyle(NORMAL);
+    
+    // Description text
+    fill(80);
+    noStroke();
+    textAlign(LEFT, CENTER);
+    textSize(16);
+    text('"The GLOBAL ELITE want you to believe', descBoxX + 80, descBoxY + descBoxHeight / 2.8);
+    text('that certain BIG, bright orbs are completely ', descBoxX + 80, descBoxY + descBoxHeight / 2);
+    text('ROUND. To them I say: Wanna bet?"', descBoxX + 80, descBoxY + descBoxHeight / 1.55);
+    
+    // Image box overlapping left side - ROTATED
+    let imageBoxSize = 80;
+    let imageBoxX = descBoxX - 20; // Overlaps by 20px
+    let imageBoxY = descBoxY - 10; // Slightly above
+    
+    push(); // Save current transformation state
+    translate(imageBoxX + imageBoxSize / 2, imageBoxY + imageBoxSize / 2); // Move to center of box
+    rotate(radians(-10)); // Rotate 10 degrees counterclockwise
+    
+    // Image box shadow
+    fill(0, 0, 0, 30);
+    noStroke();
+    rect(-imageBoxSize / 2 + 3, -imageBoxSize / 2 + 3, imageBoxSize, imageBoxSize, 8);
+    
+    // Image box background
+    fill(255);
+    stroke(0);
+    strokeWeight(2);
+    rect(-imageBoxSize / 2, -imageBoxSize / 2, imageBoxSize, imageBoxSize, 8);
+    
+    // Draw placeholder image or icon
+    noStroke();
+    if (placeholderImage && placeholderImageLoaded) {
+    try {
+        drawingContext.drawImage(placeholderImage, -33, -26, 65, 65);
+    } catch(e) {
+        // Fallback to emoji
+        fill(102, 126, 234);
+        textAlign(CENTER, CENTER);
+        textSize(40);
+        text('🧩', 0, 0);
+    }
+    } else {
+    // Fallback puzzle emoji
+    fill(102, 126, 234);
+    textAlign(CENTER, CENTER);
+    textSize(40);
+    text('🧩', 0, 0);
+    }
+    
+    pop(); // Restore transformation state
 }
 
 function mousePressed() {

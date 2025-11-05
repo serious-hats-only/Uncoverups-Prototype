@@ -1,16 +1,16 @@
 // Game state - mix of text and emoji/symbols as images
 let items = [
     // Vegas - 1 text, 2 images
-    { text: 'elvis', isImage: true, isURL: true, url: 'images/elvis.png', x: 120, y: 320, group: 'vegas', w: 85, h: 50, label: 'Elvis' },
+    { text: 'elvis', isImage: true, isURL: true, url: 'images/elvis.png', x: 120, y: 420, group: 'vegas', w: 85, h: 80, label: 'Elvis' },
     // { text: 'welcome', isImage: true, isURL: true, url: 'images/welcome.png', x: 580, y: 190, group: 'vegas', w: 85, h: 50, label: 'Welcome' },
-    { text: 'Neon', isImage: false, x: 320, y: 130, group: 'vegas', w: 85, h: 50 },
-    { text: 'slot', isImage: true, isURL: true, url: 'images/slots.png', x: 495, y: 360, group: 'vegas', w: 85, h: 50, label: 'Slot Machine' },
+    { text: 'Neon', isImage: false, x: 280, y: 170, group: 'vegas', w: 85, h: 50 },
+    { text: 'slot', isImage: true, isURL: true, url: 'images/slots.png', x: 445, y: 440, group: 'vegas', w: 85, h: 80, label: 'Slot Machine' },
     
     // Circles - 1 text, 2 images
-    { text: 'moon', isImage: true, isURL: true, url: 'images/moon.png', x: 200, y: 220, group: 'sphere', w: 85, h: 50, label: 'The Moon' },
+    { text: 'moon', isImage: true, isURL: true, url: 'images/moon.png', x: 240, y: 320, group: 'sphere', w: 85, h: 80, label: 'The Moon' },
     // { text: 'Ferris Wheel', isImage: false, x: 680, y: 320, group: 'circles', w: 95, h: 50 },
-    { text: 'sphere_poster', isImage: true, isURL: true, url: 'images/sphere_poster.png', x: 50, y: 130, group: 'sphere', w: 85, h: 50, label: 'Oreo' },
-    { text: 'Crystal Ball', isImage: false, x: 520, y: 260, group: 'sphere', w: 85, h: 50 },
+    { text: 'sphere_poster', isImage: true, isURL: true, url: 'images/sphere_poster.png', x: 50, y: 130, group: 'sphere', w: 85, h: 80, label: 'Sphere Poster' },
+    { text: 'Crystal Ball', isImage: false, x: 450, y: 290, group: 'sphere', w: 95, h: 50 },
     
     // Satellite - 2 text, 2 images
     // { text: 'Edwin Hubble', isImage: false, x: 380, y: 220, group: 'satellite', w: 100, h: 50 },
@@ -19,7 +19,7 @@ let items = [
     // { text: 'The Dave Matthews Band', isImage: false, x: 290, y: 340, group: 'satellite', w: 175, h: 50 },
     
     // Flat - 2 text, 1 images
-    { text: 'gingerbread', isImage: true, isURL: true, url: 'images/ginger_cookie.png', x: 480, y: 130, group: 'flat', w: 85, h: 50, label: 'Gingerbread Man' },
+    { text: 'gingerbread', isImage: true, isURL: true, url: 'images/ginger_cookie.png', x: 480, y: 130, group: 'flat', w: 85, h: 80, label: 'Gingerbread Man' },
     { text: 'Roadkill', isImage: false, x: 50, y: 260, group: 'flat', w: 85, h: 50 },
     // { text: 'two_dollar', isImage: true, isURL: true, url: 'images/two_dollar.png', x: 340, y: 420, group: 'flat', w: 85, h: 50, label: '$2 Bill' },
     { text: 'UK Apartment', isImage: false, x: 640, y: 220, group: 'flat', w: 125, h: 50 }
@@ -140,7 +140,7 @@ function draw() {
     textAlign(CENTER, TOP);
     textSize(18);
     fill(feedback.correct ? color(34, 197, 94) : color(239, 68, 68));
-    text(feedback.message, width / 2, 60);
+    text(feedback.message, width / 2, 80);
     }
     
     // Draw completed chains (green, verified correct)
@@ -211,7 +211,7 @@ function draw() {
         // Draw loaded image from URL using native drawImage
         let img = imageCache[item.text];
         try {
-            drawingContext.drawImage(img, item.x + item.w / 2 - 20, item.y + item.h / 2 - 20, 40, 40);
+            drawingContext.drawImage(img, item.x + item.w / 2 - 30, item.y + item.h / 2 - 30, 60, 60);
         } catch(e) {
             // If image fails, show fallback emoji
             textSize(32);
@@ -331,10 +331,9 @@ function draw() {
     textSize(24);
     text('Conspiracy: The Las Vegas Sphere is flat', width / 2, height / 2 + 20);
     textSize(16);
-    text('Circles: evil eye, oreo, sacagawea dollar, ferris wheel', width / 2, height / 2 + 60);
-    text('Las Vegas: elvis, neon sign, welcome sign, slot machine', width / 2, height / 2 + 80);
-    text('Satellite: sputnik, edwin hubble, the moon, the dave matthews band', width / 2, height / 2 + 100);
-    text('Flat: gingerbread cookie, $2 bill, roadkill, mousepad', width / 2, height / 2 + 120);
+    text('Spheres: moon, crystal ball, movie poster from the film "sphere"', width / 2, height / 2 + 60);
+    text('Las Vegas: elvis, neon sign, slot machine', width / 2, height / 2 + 80);
+    text('Flat: gingerbread cookie, roadkill, uk apartment', width / 2, height / 2 + 100);
     // textSize(20);
     // text('Score: ' + score + ' points', width / 2, height / 2 + 60);
     textSize(16);
@@ -375,8 +374,8 @@ function draw() {
     fill(50);
     textSize(13);
     text('• Click and drag to connect 3 related items', 20, 655);
-    text('• Click SUBMIT to check if correct', 20, 675);
-    text('• Complete 3 correct chains to win! You have 3 tries total.', 20, 695);
+    text('• Click SUBMIT to check if correct. You have 3 tries', 20, 675);
+    text('• Find 3 correct chains to expose the conspiracy', 20, 695);
     text('• Press \'R\' to reset game, \'U\' to undo last connection', 20, 715);
 
     // Description box with image - light orange horizontal box
@@ -394,7 +393,7 @@ function draw() {
     textAlign(CENTER, TOP);
     textSize(16);
     textStyle(BOLD);
-    text('Message from the Editor', 620, 620);
+    text('Message from The Editor', 620, 620);
     textStyle(NORMAL);
     
     // Description text
@@ -402,13 +401,13 @@ function draw() {
     noStroke();
     textAlign(LEFT, CENTER);
     textSize(16);
-    text('"The GLOBAL ELITE want you to believe', descBoxX + 80, descBoxY + descBoxHeight / 2.8);
-    text('that certain BIG, bright orbs are completely ', descBoxX + 80, descBoxY + descBoxHeight / 2);
-    text('ROUND. To them I say: Wanna bet?"', descBoxX + 80, descBoxY + descBoxHeight / 1.55);
+    text('"The GLOBAL ELITE want you to believe', descBoxX + 70, descBoxY + descBoxHeight / 2.8);
+    text('that certain BIG, bright orbs are completely ', descBoxX + 70, descBoxY + descBoxHeight / 2);
+    text('ROUND. To them I say: WANNA BET?"', descBoxX + 70, descBoxY + descBoxHeight / 1.55);
     
     // Image box overlapping left side - ROTATED
     let imageBoxSize = 80;
-    let imageBoxX = descBoxX - 20; // Overlaps by 20px
+    let imageBoxX = descBoxX - 30; // Overlaps by 20px
     let imageBoxY = descBoxY - 10; // Slightly above
     
     push(); // Save current transformation state

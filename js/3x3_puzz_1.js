@@ -1,15 +1,15 @@
 // Game state - mix of text and emoji/symbols as images
 let items = [
     // Vegas - 1 text, 2 images
-    { text: 'elvis', isImage: true, isURL: true, url: 'images/elvis.png', x: 120, y: 420, group: 'vegas', w: 85, h: 80, label: 'Elvis' },
+    { text: 'elvis', isImage: true, isURL: true, url: 'images/3x3_puzz_1_images/elvis.png', x: 120, y: 420, group: 'vegas', w: 85, h: 80, label: 'Elvis' },
     // { text: 'welcome', isImage: true, isURL: true, url: 'images/welcome.png', x: 580, y: 190, group: 'vegas', w: 85, h: 50, label: 'Welcome' },
     { text: 'Neon', isImage: false, x: 280, y: 170, group: 'vegas', w: 85, h: 50 },
-    { text: 'slot', isImage: true, isURL: true, url: 'images/slots.png', x: 445, y: 440, group: 'vegas', w: 85, h: 80, label: 'Slot Machine' },
+    { text: 'slot', isImage: true, isURL: true, url: 'images/3x3_puzz_1_images/slots.png', x: 445, y: 440, group: 'vegas', w: 85, h: 80, label: 'Slot Machine' },
     
     // Circles - 1 text, 2 images
-    { text: 'moon', isImage: true, isURL: true, url: 'images/moon.png', x: 240, y: 320, group: 'sphere', w: 85, h: 80, label: 'The Moon' },
+    { text: 'moon', isImage: true, isURL: true, url: 'images/3x3_puzz_1_images/moon.png', x: 240, y: 320, group: 'sphere', w: 85, h: 80, label: 'The Moon' },
     // { text: 'Ferris Wheel', isImage: false, x: 680, y: 320, group: 'circles', w: 95, h: 50 },
-    { text: 'sphere_poster', isImage: true, isURL: true, url: 'images/sphere_poster.png', x: 50, y: 130, group: 'sphere', w: 85, h: 80, label: 'Sphere Poster' },
+    { text: 'sphere_poster', isImage: true, isURL: true, url: 'images/3x3_puzz_1_images/sphere_poster.png', x: 50, y: 130, group: 'sphere', w: 85, h: 80, label: 'Sphere Poster' },
     { text: 'Crystal Ball', isImage: false, x: 450, y: 290, group: 'sphere', w: 95, h: 50 },
     
     // Satellite - 2 text, 2 images
@@ -19,7 +19,7 @@ let items = [
     // { text: 'The Dave Matthews Band', isImage: false, x: 290, y: 340, group: 'satellite', w: 175, h: 50 },
     
     // Flat - 2 text, 1 images
-    { text: 'gingerbread', isImage: true, isURL: true, url: 'images/ginger_cookie.png', x: 480, y: 130, group: 'flat', w: 85, h: 80, label: 'Gingerbread Man' },
+    { text: 'gingerbread', isImage: true, isURL: true, url: 'images/3x3_puzz_1_images/ginger_cookie.png', x: 480, y: 130, group: 'flat', w: 85, h: 80, label: 'Gingerbread Man' },
     { text: 'Roadkill', isImage: false, x: 50, y: 260, group: 'flat', w: 85, h: 50 },
     // { text: 'two_dollar', isImage: true, isURL: true, url: 'images/two_dollar.png', x: 340, y: 420, group: 'flat', w: 85, h: 50, label: '$2 Bill' },
     { text: 'UK Apartment', isImage: false, x: 640, y: 220, group: 'flat', w: 125, h: 50 }
@@ -77,7 +77,7 @@ for (let item of items) {
 }
 
 // Load win screen image
-winImage = loadImageFromURL('images/lv_sphere.png', 'winImage');
+winImage = loadImageFromURL('images/3x3_puzz_1_images/lv_sphere.png', 'winImage');
 winImage.onload = function() {
     winImageLoaded = true;
 };

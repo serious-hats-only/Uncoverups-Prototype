@@ -402,8 +402,7 @@ function draw() {
     textSize(16);
     text('"Just some wholesome FUN to pass the', descBoxX + 70, descBoxY + descBoxHeight / 2.8);
     text('time, eh? The truth is far more HEINOUS', descBoxX + 70, descBoxY + descBoxHeight / 2);
-    text('than you could ever imagine. Oh, the sweet,', descBoxX + 70, descBoxY + descBoxHeight / 1.55);
-    text('SWEET irony.".', descBoxX + 70, descBoxY + descBoxHeight / 1.25);
+    text('than you could ever imagine, SWEETIE.', descBoxX + 70, descBoxY + descBoxHeight / 1.55);
     
     // Image box overlapping left side - ROTATED
     let imageBoxSize = 80;

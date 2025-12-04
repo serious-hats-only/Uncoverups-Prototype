@@ -1,24 +1,24 @@
 // Game state - mix of text and emoji/symbols as images
 let items = [
     // Candy
-    { text: 'john candy', isImage: true, isURL: true, url: 'TBD', x: 120, y: 420, group: 'candy', w: 85, h: 80, label: 'John Candy' },
-    { text: 'sucking candy', isImage: true, url: 'TBD', x: 280, y: 170, group: 'candy', w: 85, h: 50, label: 'Sucking Candy' },
-    { text: 'halloween movie', isImage: true, isURL: true, url: 'TBD', x: 445, y: 440, group: 'candy', w: 85, h: 80, label: 'Halloween (Movie)' },
+    { text: 'john candy', isImage: true, isURL: true, url: 'images/4x3_puzz_1_images/john_candy.png', x: 100, y: 420, group: 'candy', w: 105, h: 105, label: 'John Candy' },
+    { text: 'sucking candy', isImage: true, isURL: true, url: 'images/4x3_puzz_1_images/sucking_candy.png', x: 280, y: 170, group: 'candy', w: 105, h: 105, label: 'Sucking Candy' },
+    { text: 'halloween movie', isImage: true, isURL: true, url: 'images/4x3_puzz_1_images/halloween.png', x: 425, y: 420, group: 'candy', w: 105, h: 105, label: 'Halloween (Movie)' },
     
     // Game
-    { text: 'the game', isImage: true, isURL: true, url: 'TBD', x: 240, y: 320, group: 'game', w: 85, h: 80, label: 'The Game (Movie)' },
-    { text: 'pickup artist', isImage: true, isURL: true, url: 'TBD', x: 50, y: 130, group: 'game', w: 85, h: 80, label: 'Pickup Artist' },
+    { text: 'the game', isImage: true, isURL: true, url: 'images/4x3_puzz_1_images/the_game.png', x: 240, y: 320, group: 'game', w: 105, h: 105, label: 'The Game (Movie)' },
+    { text: 'pickup artist', isImage: true, isURL: true, url: 'images/4x3_puzz_1_images/pickup_artist.png', x: 50, y: 130, group: 'game', w: 105, h: 105, label: 'Pickup Artist' },
     { text: '___ OVER', isImage: false, x: 450, y: 290, group: 'game', w: 95, h: 50, label: '___ OVER' },
     
     // Crush
-    { text: 'cupid', isImage: true, url: 'TBD', x: 380, y: 220, group: 'crush', w: 100, h: 50, label: 'Cupid' },
-    { text: 'industrial crusher', isImage: true, isURL: true, url: 'TBD', x: 150, y: 420, group: 'crush', w: 85, h: 50, label: 'Industrial Crusher' },
-    { text: 'orange soda', isImage: true, isURL: false, x: 620, y: 130, group: 'crush', w: 85, h: 50, label: 'Orange Soda' },
+    { text: 'cupid', isImage: true, isURL: true, url: 'images/4x3_puzz_1_images/cupid.png', x: 580, y: 340, group: 'crush', w: 105, h: 105, label: 'Cupid' },
+    { text: 'hydraulic press', isImage: true, isURL: true, url: 'images/4x3_puzz_1_images/hydraulic_press.png', x: 240, y: 460, group: 'crush', w: 105, h: 105, label: 'Hydraulic Press' },
+    { text: 'Orange Soda', isImage: false, isURL: false, x: 620, y: 130, group: 'crush', w: 96, h: 50, label: 'Orange Soda' },
     
-    // Things Where Actions In One Place Have Consequences In Another
-    { text: 'the matrix', isImage: true, isURL: true, url: 'TBD', x: 480, y: 130, group: 'things_where', w: 85, h: 80, label: 'The Matrix (Movie)' },
-    { text: 'quantum entanglement', isImage: false, x: 50, y: 260, group: 'things_where', w: 85, h: 50, label: 'Quantum Entanglement' },
-    { text: 'the picture of dorian gray', isImage: true, url: 'TBD', x: 640, y: 220, group: 'things_where', w: 125, h: 50 }
+    // Things Where Actions In One Place Have Consequences In Another or Complex Cause & Effect
+    { text: 'the matrix', isImage: true, isURL: true, url: 'images/4x3_puzz_1_images/the_matrix.png', x: 480, y: 130, group: 'Complex Cause & Effect', w: 105, h: 105, label: 'The Matrix (Movie)' },
+    { text: 'Quantum Entanglement', isImage: false, x: 50, y: 260, group: 'Complex Cause & Effect', w: 165, h: 50, label: 'Quantum Entanglement' },
+    { text: 'the picture of dorian gray', isImage: true, isURL: true, url: 'images/4x3_puzz_1_images/dorian_gray.png', x: 640, y: 220, group: 'Complex Cause & Effect', w: 105, h: 105, label: 'The Picture of Dorian Gray' }
 ];
 
 let imageCache = {};
@@ -207,7 +207,7 @@ function draw() {
         // Draw loaded image from URL using native drawImage
         let img = imageCache[item.text];
         try {
-            drawingContext.drawImage(img, item.x + item.w / 2 - 30, item.y + item.h / 2 - 30, 60, 60);
+            drawingContext.drawImage(img, item.x + item.w / 2 - 48, item.y + item.h / 2 - 48, 96, 96);
         } catch(e) {
             // If image fails, show fallback emoji
             textSize(32);
@@ -288,10 +288,11 @@ function draw() {
     textAlign(CENTER, CENTER);
     textSize(48);
     textStyle(BOLD);
-    text('🚨 TRUTH REVEALED! 🚨', width / 2, height / 2 - 40);
+    text('🚨 TRUTH REVEALED! 🚨', width / 2, height / 2 - 30);
     textStyle(NORMAL);
     textSize(24);
-    text('Conspiracy: When you crush a candy in the game, one also gets crushed in real life', width / 2, height / 2 + 20);
+    text('Conspiracy: When you crush a candy in the game,', width / 2, height / 2 + 20);
+    text('one also gets crushed in real life', width / 2, height / 2 + 60);
     //textSize(20);
     //text('Final Score: ' + score + ' points', width / 2, height / 2 + 60);
     textSize(16);
@@ -325,17 +326,17 @@ function draw() {
     text('💔 GAME OVER 💔', width / 2, height / 2 - 40);
     textStyle(NORMAL);
     textSize(24);
-    text('Conspiracy: When you crush a candy in the game, one also gets crushed in real life', width / 2, height / 2 + 20);
+    text('Conspiracy: When you crush a candy in the game,', width / 2, height / 2 + 20);
+    text('one also gets crushed in real life', width / 2, height / 2 + 50);
     textSize(16);
-    text('Candy: john candy, sucking candy, halloween movie"', width / 2, height / 2 + 60);
-    text('Game: the game movie, pickup artist, game over', width / 2, height / 2 + 80);
-    text('Crush: cupid, industrial crusher, orange soda', width / 2, height / 2 + 100);
-    text('Things Where Actions In One Place', width / 2, height / 2 + 120);
-    text('Have Consequenses In Another: the matrix movie, quantum entanglement, the picture of dorian gray', width / 2, height / 2 + 140);
+    text('Candy: john candy, sucking candy, halloween movie', width / 2, height / 2 + 100);
+    text('Game: the game movie, pickup artist, game over', width / 2, height / 2 + 120);
+    text('Crush: cupid, hydraulic press, orange soda', width / 2, height / 2 + 140);
+    text('Complex Cause & Effect: the matrix movie, quantum entanglement, the picture of dorian gray', width / 2, height / 2 + 160);
     // textSize(20);
     // text('Score: ' + score + ' points', width / 2, height / 2 + 60);
     textSize(16);
-    text('Press R to play again', width / 2, height / 2 + 220);
+    text('Press R to play again', width / 2, height / 2 + 200);
     }
 
     // Draw completed categories list (bottom right)
@@ -399,9 +400,10 @@ function draw() {
     noStroke();
     textAlign(LEFT, CENTER);
     textSize(16);
-    text('"Just some wholesome FUN to pass the time?', descBoxX + 70, descBoxY + descBoxHeight / 2.8);
-    text('The reality is more HEINOUS than you ', descBoxX + 70, descBoxY + descBoxHeight / 2);
-    text('can imagine. Oh, sweet, SWEET irony."', descBoxX + 70, descBoxY + descBoxHeight / 1.55);
+    text('"Just some wholesome FUN to pass the', descBoxX + 70, descBoxY + descBoxHeight / 2.8);
+    text('time, eh? The truth is far more HEINOUS', descBoxX + 70, descBoxY + descBoxHeight / 2);
+    text('than you could ever imagine. Oh, the sweet,', descBoxX + 70, descBoxY + descBoxHeight / 1.55);
+    text('SWEET irony.".', descBoxX + 70, descBoxY + descBoxHeight / 1.25);
     
     // Image box overlapping left side - ROTATED
     let imageBoxSize = 80;
@@ -448,7 +450,7 @@ function draw() {
 
 function mousePressed() {
     // Check if clicking submit button
-    if (currentChain.length === 4 && !gameWon && !gameLost && // 4 LINE
+    if (currentChain.length === 3 && !gameWon && !gameLost && // 4 LINE
         mouseX > submitButton.x && 
         mouseX < submitButton.x + submitButton.w &&
         mouseY > submitButton.y && 
@@ -507,8 +509,8 @@ function mouseReleased() {
         
         if (dragging === lastItem) {
         // Must continue from last item in chain
-        // Block if chain already has 4 items
-        if (!currentChain.includes(target) && !targetUsed && currentChain.length < 4) { // 4 LINE
+        // Block if chain already has 3 items
+        if (!currentChain.includes(target) && !targetUsed && currentChain.length < 3) { // 4 LINE
             currentChain.push(target);
         }
         }
@@ -519,7 +521,7 @@ function mouseReleased() {
 }
 
 function submitChain() {
-    if (currentChain.length !== 4) return; // 4 LINE
+    if (currentChain.length !== 3) return; // 4 LINE
     
     // Check if all items in chain have same group
     let firstGroup = currentChain[0].group;
@@ -537,7 +539,7 @@ function submitChain() {
     currentChain = [];
     
     // Check if game is won
-    if (completedChains.length === 3) {
+    if (completedChains.length === 4) {  // 4 LINE
         gameWon = true;
         feedback = { message: '🎉 You won! All chains correct!', correct: true };
         feedbackTimer = millis() + 5000;

@@ -155,25 +155,27 @@ function draw() {
     fill(255);
     noStroke();
     let triesBoxWidth = 140;
-    let triesBoxHeight = 35;
+    let triesBoxHeight = 55;
     let triesBoxX = width - triesBoxWidth - 12;
-    let triesBoxY = 70;
+    let triesBoxY = 45;
     rect(triesBoxX, triesBoxY, triesBoxWidth, triesBoxHeight, 8);
     
     // Draw tries remaining (hearts)
-    // textAlign(RIGHT, TOP);
-    // textSize(14);
-    // fill(0);
-    // text('Tries:', width - 120, 90);
+    textAlign(LEFT, TOP);
+    textSize(14);
+    fill(0);
+    textStyle(BOLD);
+    text('Tries:', width - 140, 55);
+    textStyle(NORMAL);
     
     for (let i = 0; i < 4; i++) { // 4 LINE
     textSize(24);
     if (i < triesRemaining) {
         fill(239, 68, 68); // Red heart for remaining tries
-        text('❤️', width - 125 + (i * 28), 77);
+        text('❤️', width - 143 + (i * 28), 70);
     } else {
         fill(200); // Gray heart for used tries
-        text('🖤', width - 125 + (i * 28), 77);
+        text('🖤', width - 143 + (i * 28), 70);
     }
     }
     

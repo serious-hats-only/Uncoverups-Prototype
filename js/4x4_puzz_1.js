@@ -1,28 +1,28 @@
 // Game state - mix of text and emoji/symbols as images
 let items = [
     // Jews
-    { text: 'larry david', isImage: true, isURL: true, url: 'TBD', x: 100, y: 420, group: 'Jews', w: 105, h: 105, label: 'larry david' },
-    { text: 'star of david', isImage: false, x: 470, y: 200, group: 'Jews', w: 95, h: 50, label: 'Star of David' },
-    { text: 'yarmulke', isImage: true, isURL: true, url: 'TBD', x: 425, y: 420, group: 'Jews', w: 105, h: 105, label: 'Yarmulke' },
+    { text: 'larry david', isImage: true, isURL: true, url: 'images/4x4_puzz_1_images/larry_david.png', x: 62, y: 410, group: 'Jews', w: 105, h: 105, label: 'larry david' },
+    { text: 'Star of David', isImage: false, x: 330, y: 175, group: 'Jews', w: 105, h: 50, label: 'Star of David' },
+    { text: 'yarmulke', isImage: true, isURL: true, url: 'images/4x4_puzz_1_images/yarmulke.png', x: 400, y: 445, group: 'Jews', w: 105, h: 105, label: 'Yarmulke' },
     { text: 'El Al Airlines', isImage: false, x: 450, y: 250, group: 'Jews', w: 95, h: 50, label: 'El Al Airlines' },
     
     // Control
-    { text: 'xbox controller', isImage: true, isURL: true, url: 'TBD', x: 240, y: 320, group: 'Control', w: 105, h: 105, label: 'Xbox Controller' },
-    { text: 'ctrl key', isImage: true, isURL: true, url: 'TBD', x: 50, y: 130, group: 'Control', w: 105, h: 105, label: 'Ctrl Key' },
-    { text: 'crowd control', isImage: false, x: 450, y: 290, group: 'Control', w: 95, h: 50, label: 'Crowd Control' },
-    { text: 'remote control', isImage: true, isURL: true, url: 'TBD', x: 240, y: 320, group: 'Control', w: 105, h: 105, label: 'Remote Control' },
+    { text: 'xbox controller', isImage: true, isURL: true, url: 'images/4x4_puzz_1_images/x_box_controller.png', x: 500, y: 333, group: 'Control', w: 105, h: 105, label: 'Xbox Controller' },
+    { text: 'ctrl key', isImage: true, isURL: true, url: 'images/4x4_puzz_1_images/ctrl_key.png', x: 50, y: 130, group: 'Control', w: 105, h: 105, label: 'Ctrl Key' },
+    { text: 'Crowd Control', isImage: false, x: 23, y: 330, group: 'Control', w: 115, h: 50, label: 'Crowd Control' },
+    { text: 'remote control', isImage: true, isURL: true, url: 'images/4x4_puzz_1_images/remote_control.png', x: 190, y: 275, group: 'Control', w: 105, h: 105, label: 'Remote Control' },
     
     // World
-    { text: 'earth', isImage: true, isURL: true, url: 'TBD', x: 580, y: 340, group: 'World', w: 105, h: 105, label: 'Earth' },
-    { text: 'twa airlines', isImage: true, isURL: true, url: 'TBD', x: 240, y: 460, group: 'World', w: 105, h: 105, label: 'TWA Airlines' },
-    { text: 'walt disney world', isImage: false, isURL: false, x: 620, y: 130, group: 'World', w: 96, h: 50, label: 'Walt Disney World' },
-    { text: 'wayne\'s world', isImage: true, isURL: true, url: 'TBD', x: 240, y: 450, group: 'World', w: 105, h: 105, label: 'Wayne\'s World' },
+    { text: 'earth', isImage: true, isURL: true, url: 'images/4x4_puzz_1_images/earth.png', x: 322, y: 320, group: 'World', w: 105, h: 105, label: 'Earth' },
+    { text: 'twa airlines', isImage: true, isURL: true, url: 'images/4x4_puzz_1_images/twa_airlines.png', x: 240, y: 445, group: 'World', w: 105, h: 105, label: 'TWA Airlines' },
+    { text: 'Walt Disney World', isImage: false, isURL: false, x: 620, y: 130, group: 'World', w: 150, h: 50, label: 'Walt Disney World' },
+    { text: 'wayne\'s world', isImage: true, isURL: true, url: 'images/4x4_puzz_1_images/waynes_world.png', x: 210, y: 150, group: 'World', w: 105, h: 105, label: 'Wayne\'s World' },
     
     // Places of Worship
-    { text: 'hindu temple', isImage: true, isURL: true, url: 'TBD', x: 480, y: 130, group: 'Places of Worship', w: 105, h: 105, label: 'Hindu Temple' },
-    { text: 'cathedral', isImage: false, x: 50, y: 260, group: 'Places of Worship', w: 165, h: 50, label: 'Cathedral' },
-    { text: 'mosque', isImage: true, isURL: true, url: 'TBD', x: 640, y: 220, group: 'Places of Worship', w: 105, h: 105, label: 'Mosque' },
-    { text: 'shinto shrine', isImage: true, isURL: true, url: 'TBD', x: 620, y: 210, group: 'Places of Worship', w: 105, h: 105, label: 'Shinto Shrine' }
+    { text: 'hindu temple', isImage: true, isURL: true, url: 'images/4x4_puzz_1_images/hindu_temple.png', x: 480, y: 130, group: 'Places of Worship', w: 105, h: 105, label: 'Hindu Temple' },
+    { text: 'Cathedral', isImage: false, x: 50, y: 260, group: 'Places of Worship', w: 85, h: 50, label: 'Cathedral' },
+    { text: 'mosque', isImage: true, isURL: true, url: 'images/4x4_puzz_1_images/mosque.png', x: 640, y: 320, group: 'Places of Worship', w: 105, h: 105, label: 'Mosque' },
+    { text: 'shinto shrine', isImage: true, isURL: true, url: 'images/4x4_puzz_1_images/shinto_shrine.png', x: 620, y: 205, group: 'Places of Worship', w: 105, h: 105, label: 'Shinto Shrine' }
 ];
 
 let imageCache = {};
@@ -240,8 +240,8 @@ function draw() {
     }
     }
     
-    // Submit button AFTER items so it draws on top (only show when current chain has 3 items)
-    if (currentChain.length === 3 && !gameWon && !gameLost) {
+    // Submit button AFTER items so it draws on top (only show when current chain has 4 items)
+    if (currentChain.length === 4 && !gameWon && !gameLost) { // 4 LINE
         let isHovered = mouseX > submitButton.x && 
                         mouseX < submitButton.x + submitButton.w &&
                         mouseY > submitButton.y && 
@@ -295,8 +295,7 @@ function draw() {
     text('🚨 TRUTH REVEALED! 🚨', width / 2, height / 2 - 30);
     textStyle(NORMAL);
     textSize(24);
-    text('Conspiracy: When you crush a candy in the game,', width / 2, height / 2 + 20);
-    text('one also gets crushed in real life', width / 2, height / 2 + 60);
+    text('Conspiracy: JEWS CONTROL THE WORLD\'S SYNAGOGUES.', width / 2, height / 2 + 20);
     //textSize(20);
     //text('Final Score: ' + score + ' points', width / 2, height / 2 + 60);
     textSize(16);
@@ -330,7 +329,7 @@ function draw() {
     text('💔 GAME OVER 💔', width / 2, height / 2 - 40);
     textStyle(NORMAL);
     textSize(24);
-    text('Conspiracy: Jews control the world\'s synagogues,', width / 2, height / 2 + 20);
+    text('Conspiracy: JEWS CONTROL THE WORLD\'S SYNAGOGUES.', width / 2, height / 2 + 20);
     textSize(16);
     text('Jews: star of david, larry david, el al airlines, yarmulke', width / 2, height / 2 + 100);
     text('Control: xbox controller, ctrl key, remote control, crowd control', width / 2, height / 2 + 120);
@@ -403,9 +402,10 @@ function draw() {
     noStroke();
     textAlign(LEFT, CENTER);
     textSize(16);
-    text('"This one goes ALL the way to the top. Call me a', descBoxX + 70, descBoxY + descBoxHeight / 2.8);
-    text('BIGOT if you must. But I STILL KNOW who runs', descBoxX + 70, descBoxY + descBoxHeight / 2);
-    text('things!', descBoxX + 70, descBoxY + descBoxHeight / 1.55);
+    text('"This one goes ALL the way to the TOP.', descBoxX + 70, descBoxY + descBoxHeight / 2.8);
+    text('Call me a BIGOT if you must. But I still', descBoxX + 70, descBoxY + descBoxHeight / 2);
+    text('know who\'s REALLY in charge."', descBoxX + 70, descBoxY + descBoxHeight / 1.55);
+    text('                                                     - E', descBoxX + 70, descBoxY + descBoxHeight / 1.25);
     
     // Image box overlapping left side - ROTATED
     let imageBoxSize = 80;

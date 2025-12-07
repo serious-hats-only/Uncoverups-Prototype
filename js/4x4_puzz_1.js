@@ -3,7 +3,7 @@ let items = [
     // Jews
     { text: 'larry david', isImage: true, isURL: true, url: 'images/4x4_puzz_1_images/larry_david.png', x: 62, y: 410, group: 'Jews', w: 105, h: 105, label: 'larry david' },
     { text: 'Star of David', isImage: false, x: 330, y: 175, group: 'Jews', w: 105, h: 50, label: 'Star of David' },
-    { text: 'yarmulke', isImage: true, isURL: true, url: 'images/4x4_puzz_1_images/yarmulke.png', x: 400, y: 445, group: 'Jews', w: 105, h: 105, label: 'Yarmulke' },
+    { text: 'yarmulke', isImage: true, isURL: true, url: 'images/4x4_puzz_1_images/yarmulke.png', x: 389, y: 436, group: 'Jews', w: 105, h: 105, label: 'Yarmulke' },
     { text: 'El Al Airlines', isImage: false, x: 450, y: 250, group: 'Jews', w: 95, h: 50, label: 'El Al Airlines' },
     
     // Control
@@ -13,8 +13,8 @@ let items = [
     { text: 'remote control', isImage: true, isURL: true, url: 'images/4x4_puzz_1_images/remote_control.png', x: 190, y: 275, group: 'Control', w: 105, h: 105, label: 'Remote Control' },
     
     // World
-    { text: 'earth', isImage: true, isURL: true, url: 'images/4x4_puzz_1_images/earth.png', x: 322, y: 320, group: 'World', w: 105, h: 105, label: 'Earth' },
-    { text: 'twa airlines', isImage: true, isURL: true, url: 'images/4x4_puzz_1_images/twa_airlines.png', x: 240, y: 445, group: 'World', w: 105, h: 105, label: 'TWA Airlines' },
+    { text: 'earth', isImage: true, isURL: true, url: 'images/4x4_puzz_1_images/earth.png', x: 322, y: 300, group: 'World', w: 105, h: 105, label: 'Earth' },
+    { text: 'twa airlines', isImage: true, isURL: true, url: 'images/4x4_puzz_1_images/twa_airlines.png', x: 230, y: 425, group: 'World', w: 105, h: 105, label: 'TWA Airlines' },
     { text: 'Walt Disney World', isImage: false, isURL: false, x: 620, y: 130, group: 'World', w: 150, h: 50, label: 'Walt Disney World' },
     { text: 'wayne\'s world', isImage: true, isURL: true, url: 'images/4x4_puzz_1_images/waynes_world.png', x: 210, y: 150, group: 'World', w: 105, h: 105, label: 'Wayne\'s World' },
     
@@ -49,6 +49,10 @@ let placeholderImageLoaded = false;
 // Win screen trophy image
 let winImage = null;
 let winImageLoaded = false;
+
+// Background texture
+let bgTexture = null;
+let bgTextureLoaded = false;
 
 // Load images using native JavaScript instead of p5.js preload
 function loadImageFromURL(url, key) {
@@ -88,6 +92,12 @@ placeholderImage.onload = function() {
     placeholderImageLoaded = true;
 };
 
+// Load background texture
+bgTexture = loadImageFromURL('images/cork_board.png', 'bgTexture');
+bgTexture.onload = function() {
+    bgTextureLoaded = true;
+};
+
 function setup() {
     let canvas = createCanvas(800, 750);
     canvas.parent('sketch-container');
@@ -96,7 +106,30 @@ function setup() {
 }
 
 function draw() {
+    // Draw repeating background texture or fallback to solid color
+    if (bgTexture && bgTextureLoaded) {
+    // Create repeating pattern
+    try {
+        let pattern = drawingContext.createPattern(bgTexture, 'repeat');
+        drawingContext.fillStyle = pattern;
+        drawingContext.fillRect(0, 0, width, height);
+    } catch(e) {
+        // Fallback to white background if pattern fails
+        background(250);
+    }
+    } else {
+    // White background while texture loads
     background(250);
+    }
+
+    // White box behind title
+    fill(255);
+    noStroke();
+    let titleBoxWidth = 420;
+    let titleBoxHeight = 90;
+    let titleBoxX = (width - titleBoxWidth) / 2;
+    let titleBoxY = 10;
+    rect(titleBoxX, titleBoxY, titleBoxWidth, titleBoxHeight, 8);
     
     // Title at top
     fill(0);
@@ -117,21 +150,30 @@ function draw() {
     // textSize(14);
     // text('Correct chains: ' + completedChains.length + ' / 4', 10, 90);
     // text('Current chain: ' + currentChain.length + ' / 4 items', 10, 110);
+
+    // White box behind tries/hearts section
+    fill(255);
+    noStroke();
+    let triesBoxWidth = 140;
+    let triesBoxHeight = 35;
+    let triesBoxX = width - triesBoxWidth - 12;
+    let triesBoxY = 70;
+    rect(triesBoxX, triesBoxY, triesBoxWidth, triesBoxHeight, 8);
     
     // Draw tries remaining (hearts)
-    textAlign(RIGHT, TOP);
-    textSize(14);
-    fill(0);
-    text('Tries:', width - 120, 90);
+    // textAlign(RIGHT, TOP);
+    // textSize(14);
+    // fill(0);
+    // text('Tries:', width - 120, 90);
     
     for (let i = 0; i < 4; i++) { // 4 LINE
     textSize(24);
     if (i < triesRemaining) {
         fill(239, 68, 68); // Red heart for remaining tries
-        text('❤️', width - 85 + (i * 28), 84);
+        text('❤️', width - 125 + (i * 28), 77);
     } else {
         fill(200); // Gray heart for used tries
-        text('🖤', width - 85 + (i * 28), 84);
+        text('🖤', width - 125 + (i * 28), 77);
     }
     }
     

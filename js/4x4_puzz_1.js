@@ -54,6 +54,10 @@ let winImageLoaded = false;
 let bgTexture = null;
 let bgTextureLoaded = false;
 
+// Push pin image
+let pushPinImage = null;
+let pushPinImageLoaded = false;
+
 // Load images using native JavaScript instead of p5.js preload
 function loadImageFromURL(url, key) {
     let img = new Image();
@@ -97,6 +101,16 @@ bgTexture = loadImageFromURL('images/cork_board.png', 'bgTexture');
 bgTexture.onload = function() {
     bgTextureLoaded = true;
 };
+
+// Load push pin image
+    // Replace with file path: '/images/red_pin.png' for image
+    // Using a simple circle as placeholder
+    pushPinImage = new Image();
+    pushPinImage.onload = function() {
+      pushPinImageLoaded = true;
+    };
+    // Simple colored circle
+    pushPinImage.src = 'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyMCAyMCI+PGNpcmNsZSBjeD0iMTAiIGN5PSIxMCIgcj0iOCIgZmlsbD0iI2VmNDQ0NCIgc3Ryb2tlPSIjYjkxYzFjIiBzdHJva2Utd2lkdGg9IjEuNSIvPjwvc3ZnPg==';
 
 function setup() {
     let canvas = createCanvas(800, 750);
@@ -282,6 +296,28 @@ function draw() {
         textSize(10);
         text(pos, item.x + item.w - 12, item.y + 12);
     }
+
+    // Draw push pin at top center of item box
+    if (pushPinImage && pushPinImageLoaded) {
+        try {
+        let pinSize = 12;
+        let pinX = item.x + item.w / 2 - pinSize / 2;
+        let pinY = item.y - pinSize / 2; // Half above the box
+        drawingContext.drawImage(pushPinImage, pinX, pinY, pinSize, pinSize);
+        } catch(e) {
+        // Fallback to simple circle
+        fill(239, 68, 68);
+        stroke(185, 28, 28);
+        strokeWeight(1.5);
+        circle(item.x + item.w / 2, item.y, 8);
+        }
+    } else {
+        // Fallback push pin circle while loading
+        fill(239, 68, 68);
+        stroke(185, 28, 28);
+        strokeWeight(1.5);
+        circle(item.x + item.w / 2, item.y, 8);
+    }
     }
     
     // Submit button AFTER items so it draws on top (only show when current chain has 4 items)
@@ -339,7 +375,7 @@ function draw() {
     text('🚨 TRUTH REVEALED! 🚨', width / 2, height / 2 - 30);
     textStyle(NORMAL);
     textSize(24);
-    text('Conspiracy: JEWS CONTROL THE WORLD\'S SYNAGOGUES.', width / 2, height / 2 + 20);
+    text('Conspiracy: JEWS CONTROL THE WORLD\'S SYNAGOGUES', width / 2, height / 2 + 20);
     //textSize(20);
     //text('Final Score: ' + score + ' points', width / 2, height / 2 + 60);
     textSize(16);
@@ -373,7 +409,7 @@ function draw() {
     text('💔 GAME OVER 💔', width / 2, height / 2 - 40);
     textStyle(NORMAL);
     textSize(24);
-    text('Conspiracy: JEWS CONTROL THE WORLD\'S SYNAGOGUES.', width / 2, height / 2 + 20);
+    text('Conspiracy: JEWS CONTROL THE WORLD\'S SYNAGOGUES', width / 2, height / 2 + 20);
     textSize(16);
     text('Jews: star of david, larry david, el al airlines, yarmulke', width / 2, height / 2 + 100);
     text('Control: xbox controller, ctrl key, remote control, crowd control', width / 2, height / 2 + 120);

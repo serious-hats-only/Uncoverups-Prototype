@@ -3,7 +3,7 @@ let items = [
     // Jews
     { text: 'larry david', isImage: true, isURL: true, url: 'images/4x4_puzz_1_images/larry_david.png', x: 62, y: 410, group: 'Jews', w: 105, h: 105, label: 'larry david' },
     { text: 'Star of David', isImage: false, x: 330, y: 175, group: 'Jews', w: 105, h: 50, label: 'Star of David' },
-    { text: 'yarmulke', isImage: true, isURL: true, url: 'images/4x4_puzz_1_images/yarmulke.png', x: 389, y: 436, group: 'Jews', w: 105, h: 105, label: 'Yarmulke' },
+    { text: 'menorah', isImage: true, isURL: true, url: 'images/4x4_puzz_1_images/menorah.png', x: 389, y: 436, group: 'Jews', w: 105, h: 105, label: 'menorah' },
     { text: 'El Al Airlines', isImage: false, x: 450, y: 250, group: 'Jews', w: 95, h: 50, label: 'El Al Airlines' },
     
     // Control
@@ -411,7 +411,7 @@ function draw() {
     textSize(24);
     text('Conspiracy: JEWS CONTROL THE WORLD\'S SYNAGOGUES', width / 2, height / 2 + 20);
     textSize(16);
-    text('Jews: star of david, larry david, el al airlines, yarmulke', width / 2, height / 2 + 100);
+    text('Jews: star of david, larry david, el al airlines, menorah', width / 2, height / 2 + 100);
     text('Control: xbox controller, ctrl key, remote control, crowd control', width / 2, height / 2 + 120);
     text('World: earth, walt disney world, wayne\'s world, twa airlines', width / 2, height / 2 + 140);
     text('Places of Worship: hindu temple, cathedral, mosque, shinto shrine', width / 2, height / 2 + 160);

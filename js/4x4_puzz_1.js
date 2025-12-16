@@ -201,36 +201,6 @@ function draw() {
     text(feedback.message, width / 2, 80);
     }
     
-    // Draw completed chains (green, verified correct)
-    strokeWeight(3);
-    for (let chain of completedChains) {
-    stroke(34, 197, 94);
-    for (let i = 0; i < chain.length - 1; i++) {
-        let fromCenter = getCenter(chain[i]);
-        let toCenter = getCenter(chain[i + 1]);
-        line(fromCenter.x, fromCenter.y, toCenter.x, toCenter.y);
-    }
-    }
-    
-    // Draw current chain connections (blue, not yet verified)
-    strokeWeight(3);
-    stroke(255, 0, 0); // orig: 102, 126, 234
-    for (let i = 0; i < currentChain.length - 1; i++) {
-        let fromCenter = getCenter(currentChain[i]);
-        let toCenter = getCenter(currentChain[i + 1]);
-        line(fromCenter.x, fromCenter.y, toCenter.x, toCenter.y);
-    }
-    
-    // Draw dragging line
-    if (dragging) {
-        stroke(255, 0, 0); // orig: 102, 126, 234
-        strokeWeight(2);
-        drawingContext.setLineDash([5, 5]);
-        let fromCenter = getCenter(dragging);
-        line(fromCenter.x, fromCenter.y, dragX, dragY);
-        drawingContext.setLineDash([]);
-    }
-    
     // Draw items
     for (let item of items) {
     let isHovered = isMouseOver(item);
@@ -292,9 +262,12 @@ function draw() {
     // Chain position indicator
     if (isInCurrentChain) {
         let pos = currentChain.indexOf(item) + 1;
-        fill(102, 126, 234);
-        textSize(10);
-        text(pos, item.x + item.w - 12, item.y + 12);
+        textStyle(BOLD)
+        fill(255, 0, 0);
+        // fill(102, 126, 234);
+        textSize(14);
+        text(pos, item.x + item.w - 15, item.y + 15);
+        textStyle(NORMAL)
     }
 
     // Draw push pin at top center of item box
@@ -318,6 +291,36 @@ function draw() {
         strokeWeight(1.5);
         circle(item.x + item.w / 2, item.y, 8);
     }
+    }
+
+    // Draw completed chains (green, verified correct)
+    strokeWeight(3);
+    for (let chain of completedChains) {
+    stroke(34, 197, 94);
+    for (let i = 0; i < chain.length - 1; i++) {
+        let fromCenter = getCenter(chain[i]);
+        let toCenter = getCenter(chain[i + 1]);
+        line(fromCenter.x, fromCenter.y, toCenter.x, toCenter.y);
+    }
+    }
+    
+    // Draw current chain connections (blue, not yet verified)
+    strokeWeight(3);
+    stroke(255, 0, 0); // orig: 102, 126, 234
+    for (let i = 0; i < currentChain.length - 1; i++) {
+        let fromCenter = getCenter(currentChain[i]);
+        let toCenter = getCenter(currentChain[i + 1]);
+        line(fromCenter.x, fromCenter.y, toCenter.x, toCenter.y);
+    }
+
+    // Draw dragging line
+    if (dragging) {
+        stroke(255, 0, 0); // orig: 102, 126, 234
+        strokeWeight(2);
+        drawingContext.setLineDash([5, 5]);
+        let fromCenter = getCenter(dragging);
+        line(fromCenter.x, fromCenter.y, dragX, dragY);
+        drawingContext.setLineDash([]);
     }
     
     // Submit button AFTER items so it draws on top (only show when current chain has 4 items)

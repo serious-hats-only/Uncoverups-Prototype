@@ -483,8 +483,9 @@ function draw() {
     noStroke();
     textAlign(LEFT, CENTER);
     textSize(16);
-    text('"We are not alone."', descBoxX + 70, descBoxY + descBoxHeight / 2.8);
-    text('                                                     - E', descBoxX + 70, descBoxY + descBoxHeight / 2);
+    text('"Let me lay something HEAVY on you: "', descBoxX + 70, descBoxY + descBoxHeight / 2.8);
+    text('We are NOT alone.', descBoxX + 70, descBoxY + descBoxHeight / 2);
+    text('                                                     - E', descBoxX + 70, descBoxY + descBoxHeight / 1.55);
     
     // Image box overlapping left side - ROTATED
     let imageBoxSize = 80;

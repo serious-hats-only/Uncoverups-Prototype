@@ -1,24 +1,24 @@
 // Game state - mix of text and emoji/symbols as images
 let items = [
     // Alien
-    { text: '\'alien\' poster', isImage: true, isURL: true, url: 'images/4x3_puzz_2_images/TBD.png', x: 62, y: 410, group: 'Alien', w: 105, h: 105, label: '\'alien\' poster' },
-    { text: 'ufo', isImage: true, isURL: true, url:'images/4x3_puzz_2_images/TBD.png', x: 330, y: 175, group: 'Alien', w: 105, h: 50, label: 'ufo' },
-    { text: 'menorah', isImage: true, isURL: true, url: 'images/4x3_puzz_2_images/TBD.png', x: 389, y: 436, group: 'Alien', w: 105, h: 105, label: 'menorah' },
+    { text: '\'alien\' poster', isImage: true, isURL: true, url: 'images/4x3_puzz_2_images/alien_poster.png', x: 62, y: 410, group: 'Alien', w: 105, h: 105, label: '\'alien\' poster' },
+    { text: 'ufo', isImage: true, isURL: true, url:'images/4x3_puzz_2_images/ufo.png', x: 280, y: 145, group: 'Alien', w: 105, h: 105, label: 'ufo' },
+    { text: 'alf', isImage: true, isURL: true, url: 'images/4x3_puzz_2_images/alf.png', x: 389, y: 436, group: 'Alien', w: 105, h: 105, label: 'alf' },
     
     // Teach
-    { text: 'blackboard', isImage: true, isURL: true, url: 'images/4x3_puzz_2_images/TBD.png', x: 500, y: 333, group: 'Teach', w: 105, h: 105, label: 'blackboard' },
-    { text: 'abc blocks', isImage: true, isURL: true, url: 'images/4x3_puzz_2_images/TBD.png', x: 50, y: 130, group: 'Teach', w: 105, h: 105, label: 'abc blocks' },
+    { text: 'blackboard', isImage: true, isURL: true, url: 'images/4x3_puzz_2_images/blackboard.png', x: 500, y: 333, group: 'Teach', w: 105, h: 105, label: 'blackboard' },
+    { text: 'abc blocks', isImage: true, isURL: true, url: 'images/4x3_puzz_2_images/abc_blocks.png', x: 50, y: 130, group: 'Teach', w: 105, h: 105, label: 'abc blocks' },
     { text: 'Lecture Hall', isImage: false, x: 23, y: 330, group: 'Teach', w: 115, h: 50, label: 'Lecture Hall' },
     
     // Rock
-    { text: 'boulder', isImage: true, isURL: true, url: 'images/4x3_puzz_2_images/TBD.png', x: 322, y: 300, group: 'Rock', w: 105, h: 105, label: 'boulder' },
-    { text: 'dwayne johnson', isImage: true, isURL: true, url: 'images/4x3_puzz_2_images/TBD.png', x: 230, y: 425, group: 'Rock', w: 105, h: 105, label: 'dwayne johnson' },
-    { text: 'Spinal Tap', isImage: false, isURL: false, x: 620, y: 130, group: 'Rock', w: 150, h: 50, label: 'Spinal Tap' },
+    { text: 'boulder', isImage: true, isURL: true, url: 'images/4x3_puzz_2_images/boulder.png', x: 322, y: 300, group: 'Rock', w: 105, h: 105, label: 'boulder' },
+    { text: 'dwayne johnson', isImage: true, isURL: true, url: 'images/4x3_puzz_2_images/dwayne_johnson.png', x: 230, y: 425, group: 'Rock', w: 105, h: 105, label: 'dwayne johnson' },
+    { text: 'Spinal Tap', isImage: false, isURL: false, x: 620, y: 130, group: 'Rock', w: 100, h: 50, label: 'Spinal Tap' },
     
     // Balance
-    { text: 'balance beam', isImage: true, isURL: true, url: 'images/4x3_puzz_2_images/TBD.png', x: 480, y: 130, group: 'Balance', w: 105, h: 105, label: 'balance beam' },
-    { text: 'Work-Life Balance', isImage: false, x: 50, y: 260, group: 'Balance', w: 115, h: 50, label: 'Work-Life Balance' },
-    { text: 'scale of justice', isImage: true, isURL: true, url: 'images/4x3_puzz_2_images/TBD.png', x: 640, y: 320, group: 'Balance', w: 105, h: 105, label: 'scale of justice' },
+    { text: 'balance beam', isImage: true, isURL: true, url: 'images/4x3_puzz_2_images/balance_beam.png', x: 480, y: 130, group: 'Balance', w: 105, h: 105, label: 'balance beam' },
+    { text: 'Work-Life Balance', isImage: false, x: 125, y: 260, group: 'Balance', w: 135, h: 50, label: 'Work-Life Balance' },
+    { text: 'scale of justice', isImage: true, isURL: true, url: 'images/4x3_puzz_2_images/scale_of_justice.png', x: 640, y: 275, group: 'Balance', w: 105, h: 105, label: 'scale of justice' },
 ];
 
 let imageCache = {};
@@ -81,7 +81,7 @@ for (let item of items) {
 }
 
 // Load win screen image
-winImage = loadImageFromURL('images/4x4_puzz_1_images/synagogue.png', 'winImage');
+winImage = loadImageFromURL('images/4x3_puzz_2_images/stonehenge.png', 'winImage');
 winImage.onload = function() {
     winImageLoaded = true;
 };
@@ -374,7 +374,8 @@ function draw() {
     text('🚨 TRUTH REVEALED! 🚨', width / 2, height / 2 - 30);
     textStyle(NORMAL);
     textSize(24);
-    text('Conspiracy: ALIENS BUILT STONEHENGE TO TEACH HUMANS HOW TO BALANCE ONE ROCK ON TOP OF TWO ROCKS', width / 2, height / 2 + 20);
+    text('Conspiracy: ALIENS BUILT STONEHENGE TO TEACH HUMANS', width / 2, height / 2 + 20);
+    text('HOW TO BALANCE ONE ROCK ON TOP OF TWO ROCKS', width / 2, height / 2 + 50);
     //textSize(20);
     //text('Final Score: ' + score + ' points', width / 2, height / 2 + 60);
     textSize(16);
@@ -408,7 +409,8 @@ function draw() {
     text('💔 GAME OVER 💔', width / 2, height / 2 - 40);
     textStyle(NORMAL);
     textSize(24);
-    text('Conspiracy: ALIENS BUILT STONEHENGE TO TEACH HUMANS HOW TO BALANCE ONE ROCK ON TOP OF TWO ROCKS', width / 2, height / 2 + 20);
+    text('Conspiracy: ALIENS BUILT STONEHENGE TO TEACH HUMANS', width / 2, height / 2 + 20);
+    text('HOW TO BALANCE ONE ROCK ON TOP OF TWO ROCKS', width / 2, height / 2 + 50);
     textSize(16);
     text('Alien: \'alien\' poster, ufo, alf', width / 2, height / 2 + 100);
     text('Teach: blackboard, lecture hall, abc blocks', width / 2, height / 2 + 120);
@@ -481,8 +483,8 @@ function draw() {
     noStroke();
     textAlign(LEFT, CENTER);
     textSize(16);
-    text('"We are not alone.', descBoxX + 70, descBoxY + descBoxHeight / 2.8);
-    text('                                                     - E', descBoxX + 70, descBoxY + descBoxHeight / 1.25);
+    text('"We are not alone."', descBoxX + 70, descBoxY + descBoxHeight / 2.8);
+    text('                                                     - E', descBoxX + 70, descBoxY + descBoxHeight / 2);
     
     // Image box overlapping left side - ROTATED
     let imageBoxSize = 80;
@@ -589,7 +591,7 @@ function mouseReleased() {
         if (dragging === lastItem) {
         // Must continue from last item in chain
         // Block if chain already has 3 items
-        if (!currentChain.includes(target) && !targetUsed && currentChain.length < 3) { // 4 LINE, 4 if 4x4, else 3
+        if (!currentChain.includes(target) && !targetUsed && currentChain.length < 4) { // 4 LINE, 4 if 4x4, else 3
             currentChain.push(target);
         }
         }
@@ -600,7 +602,7 @@ function mouseReleased() {
 }
 
 function submitChain() {
-    if (currentChain.length !== 4) return; // 4 LINE, 3 if 3x3, else 4
+    if (currentChain.length !== 3) return; // 4 LINE, 4 if 4x4, else 3
     
     // Check if all items in chain have same group
     let firstGroup = currentChain[0].group;

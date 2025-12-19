@@ -1,19 +1,19 @@
 // Game state - mix of text and emoji/symbols as images
 let items = [
     // Obama
-    { text: '43', isImage: false, x: 62, y: 410, group: 'Obama', w: 75, h: 50, label: '43' },
-    { text: 'white house', isImage: true, isURL: true, url:'images/3x3_puzz_2_images/TBD.png', x: 280, y: 145, group: 'Obama', w: 105, h: 105, label: 'white house' },
-    { text: 'hope', isImage: true, isURL: true, url: 'images/3x3_puzz_2_images/TBD.png', x: 389, y: 436, group: 'Obama', w: 105, h: 105, label: 'hope' },
+    { text: '43', isImage: false, x: 162, y: 320, group: 'Obama', w: 75, h: 50, label: '43' },
+    { text: 'white house', isImage: true, isURL: true, url:'images/3x3_puzz_2_images/white_house.png', x: 280, y: 145, group: 'Obama', w: 105, h: 105, label: 'white house' },
+    { text: 'hope', isImage: true, isURL: true, url: 'images/3x3_puzz_2_images/hope.png', x: 389, y: 436, group: 'Obama', w: 105, h: 105, label: 'hope' },
     
     // America
-    { text: 'bald eagle', isImage: true, isURL: true, url: 'images/3x3_puzz_2_images/TBD.png', x: 500, y: 333, group: 'America', w: 105, h: 105, label: 'bald eagle' },
-    { text: 'american flag', isImage: true, isURL: true, url: 'images/3x3_puzz_2_images/TBD.png', x: 50, y: 130, group: 'America', w: 105, h: 105, label: 'american flag' },
-    { text: '1776', isImage: false, x: 23, y: 330, group: 'America', w: 115, h: 50, label: '1776' },
+    { text: 'bald eagle', isImage: true, isURL: true, url: 'images/3x3_puzz_2_images/bald_eagle.png', x: 500, y: 235, group: 'America', w: 105, h: 105, label: 'bald eagle' },
+    { text: 'american flag', isImage: true, isURL: true, url: 'images/3x3_puzz_2_images/american_flag.png', x: 50, y: 130, group: 'America', w: 105, h: 105, label: 'american flag' },
+    { text: '1776', isImage: false, x: 23, y: 330, group: 'America', w: 75, h: 50, label: '1776' },
     
     // Fetus
-    { text: 'ultrasound', isImage: true, isURL: true, url: 'images/3x3_puzz_2_images/TBD.png', x: 322, y: 300, group: 'Fetus', w: 105, h: 105, label: 'ultrasound' },
-    { text: 'pregnancy test', isImage: true, isURL: true, url: 'images/3x3_puzz_2_images/TBD.png', x: 230, y: 425, group: 'Fetus', w: 105, h: 105, label: 'pregnancy test' },
-    { text: 'Trimester', isImage: false, isURL: false, x: 620, y: 130, group: 'Fetus', w: 100, h: 50, label: 'Trimester' },
+    { text: 'ultrasound', isImage: true, isURL: true, url: 'images/3x3_puzz_2_images/ultrasound.png', x: 322, y: 300, group: 'Fetus', w: 105, h: 105, label: 'ultrasound' },
+    { text: 'pregnancy test', isImage: true, isURL: true, url: 'images/3x3_puzz_2_images/pregnancy_test.png', x: 180, y: 425, group: 'Fetus', w: 105, h: 105, label: 'pregnancy test' },
+    { text: 'Trimester', isImage: false, isURL: false, x: 620, y: 150, group: 'Fetus', w: 100, h: 50, label: 'Trimester' },
 ];
 
 let imageCache = {};
@@ -159,9 +159,9 @@ function draw() {
     // White box behind tries/hearts section
     fill(255);
     noStroke();
-    let triesBoxWidth = 140;
+    let triesBoxWidth = 100;
     let triesBoxHeight = 55;
-    let triesBoxX = width - triesBoxWidth - 12;
+    let triesBoxX = width - triesBoxWidth - 49;
     let triesBoxY = 45;
     rect(triesBoxX, triesBoxY, triesBoxWidth, triesBoxHeight, 8);
     
@@ -477,8 +477,8 @@ function draw() {
     noStroke();
     textAlign(LEFT, CENTER);
     textSize(16);
-    text('"SMOOTH skin...MINIMAL hair...VERY flexible..."', descBoxX + 70, descBoxY + descBoxHeight / 2.8);
-    text('Isn\'t it OBVIOUS???', descBoxX + 70, descBoxY + descBoxHeight / 2);
+    text('"SMOOTH skin. MINIMAL hair. VERY flexible.', descBoxX + 70, descBoxY + descBoxHeight / 2.8);
+    text('Isn\'t it OBVIOUS???"', descBoxX + 70, descBoxY + descBoxHeight / 2);
     text('                                                     - E', descBoxX + 70, descBoxY + descBoxHeight / 1.55);
     
     // Image box overlapping left side - ROTATED

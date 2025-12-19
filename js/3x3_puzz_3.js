@@ -1,19 +1,19 @@
 // Game state - mix of text and emoji/symbols as images
 let items = [
     // Iceberg
-    { text: 'pencil tip', isImage: true, isURL: true, url:'images/3x3_puzz_3_images/TBD.png', x: 162, y: 320, group: 'Iceberg', w: 105, h: 105, label: 'pencil tip' },
-    { text: 'ice', isImage: true, isURL: true, url:'images/3x3_puzz_3_images/TBD.png', x: 280, y: 145, group: 'Iceberg', w: 105, h: 105, label: 'ice' },
-    { text: 'polar bear', isImage: true, isURL: true, url: 'images/3x3_puzz_3_images/TBD.png', x: 389, y: 436, group: 'Iceberg', w: 105, h: 105, label: 'polar bear' },
+    { text: 'pencil tip', isImage: true, isURL: true, url:'images/3x3_puzz_3_images/pencil_tip.png', x: 162, y: 320, group: 'Iceberg', w: 105, h: 105, label: 'pencil tip' },
+    { text: 'ice', isImage: true, isURL: true, url:'images/3x3_puzz_3_images/ice.png', x: 280, y: 145, group: 'Iceberg', w: 105, h: 105, label: 'ice' },
+    { text: 'polar bear', isImage: true, isURL: true, url: 'images/3x3_puzz_3_images/polar_bear.png', x: 389, y: 436, group: 'Iceberg', w: 105, h: 105, label: 'polar bear' },
     
     // Passenger
-    { text: 'passenger seat', isImage: true, isURL: true, url: 'images/3x3_puzz_3_images/TBD.png', x: 500, y: 235, group: 'Passenger', w: 105, h: 105, label: 'passenger seat' },
-    { text: 'luggage', isImage: true, isURL: true, url: 'images/3x3_puzz_3_images/TBD.png', x: 50, y: 130, group: 'Passenger', w: 105, h: 105, label: 'luggage' },
-    { text: 'Cruise Ticket', isImage: false, x: 23, y: 330, group: 'Passenger', w: 75, h: 50, label: 'Cruise Ticket' },
+    { text: 'passenger seat', isImage: true, isURL: true, url: 'images/3x3_puzz_3_images/passenger_seat.png', x: 500, y: 235, group: 'Passenger', w: 105, h: 105, label: 'passenger seat' },
+    { text: 'luggage', isImage: true, isURL: true, url: 'images/3x3_puzz_3_images/luggage.png', x: 50, y: 130, group: 'Passenger', w: 105, h: 105, label: 'luggage' },
+    { text: 'Cruise Ticket', isImage: false, x: 23, y: 330, group: 'Passenger', w: 125, h: 50, label: 'Cruise Ticket' },
     
     // Titanic
-    { text: 'no sink', isImage: true, isURL: true, url: 'images/3x3_puzz_3_images/TBD.png', x: 322, y: 300, group: 'Titanic', w: 105, h: 105, label: 'no sink' },
-    { text: 'alvin submersible', isImage: true, isURL: true, url: 'images/3x3_puzz_3_images/TBD.png', x: 180, y: 425, group: 'Titanic', w: 105, h: 105, label: 'alvin submersible' },
-    { text: 'James Cameron', isImage: false, isURL: false, x: 620, y: 150, group: 'Titanic', w: 100, h: 50, label: 'James Cameron' },
+    { text: 'no sink', isImage: true, isURL: true, url: 'images/3x3_puzz_3_images/no_sink.png', x: 322, y: 300, group: 'Titanic', w: 105, h: 105, label: 'no sink' },
+    { text: 'alvin submersible', isImage: true, isURL: true, url: 'images/3x3_puzz_3_images/alvin.png', x: 75, y: 450, group: 'Titanic', w: 105, h: 105, label: 'alvin submersible' },
+    { text: 'James Cameron', isImage: false, isURL: false, x: 620, y: 150, group: 'Titanic', w: 150, h: 50, label: 'James Cameron' },
 ];
 
 let imageCache = {};
@@ -475,8 +475,8 @@ function draw() {
     noStroke();
     textAlign(LEFT, CENTER);
     textSize(16);
-    text('"SMOOTH skin. MINIMAL hair. VERY flexible.', descBoxX + 70, descBoxY + descBoxHeight / 2.8);
-    text('Isn\'t it OBVIOUS???"', descBoxX + 70, descBoxY + descBoxHeight / 2);
+    text('"Don\'t let THEM whitewash HISTORY.', descBoxX + 70, descBoxY + descBoxHeight / 2.8);
+    text('It was CLEARLY an inside job."', descBoxX + 70, descBoxY + descBoxHeight / 2);
     text('                                                     - E', descBoxX + 70, descBoxY + descBoxHeight / 1.55);
     
     // Image box overlapping left side - ROTATED

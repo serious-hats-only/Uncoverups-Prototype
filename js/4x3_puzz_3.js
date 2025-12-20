@@ -1,24 +1,24 @@
 // Game state - mix of text and emoji/symbols as images
 let items = [
-    // Alien
-    { text: '\'alien\' poster', isImage: true, isURL: true, url: 'images/4x3_puzz_2_images/alien_poster.png', x: 62, y: 410, group: 'Alien', w: 105, h: 105, label: '\'alien\' poster' },
-    { text: 'ufo', isImage: true, isURL: true, url:'images/4x3_puzz_2_images/ufo.png', x: 280, y: 145, group: 'Alien', w: 105, h: 105, label: 'ufo' },
-    { text: 'alf', isImage: true, isURL: true, url: 'images/4x3_puzz_2_images/alf.png', x: 389, y: 436, group: 'Alien', w: 105, h: 105, label: 'alf' },
-    
-    // Teach
-    { text: 'blackboard', isImage: true, isURL: true, url: 'images/4x3_puzz_2_images/blackboard.png', x: 500, y: 333, group: 'Teach', w: 105, h: 105, label: 'blackboard' },
-    { text: 'abc blocks', isImage: true, isURL: true, url: 'images/4x3_puzz_2_images/abc_blocks.png', x: 50, y: 130, group: 'Teach', w: 105, h: 105, label: 'abc blocks' },
-    { text: 'Lecture Hall', isImage: false, x: 23, y: 330, group: 'Teach', w: 115, h: 50, label: 'Lecture Hall' },
+    // Salt
+    { text: 'Morton Salt', isImage: true, isURL: true, url: 'images/4x3_puzz_3_images/morton.png', x: 62, y: 410, group: 'Salt', w: 105, h: 105, label: 'Morton Salt' },
+    { text: 'Veruca Salt', isImage: true, isURL: true, url:'images/4x3_puzz_3_images/veruca_salt.png', x: 280, y: 145, group: 'Salt', w: 105, h: 105, label: 'Veruca Salt' },
+    { text: 'NaCl', isImage: false, x: 389, y: 436, group: 'Salt', w: 75, h: 50, label: 'NaCl' },
     
     // Rock
-    { text: 'boulder', isImage: true, isURL: true, url: 'images/4x3_puzz_2_images/boulder.png', x: 322, y: 300, group: 'Rock', w: 105, h: 105, label: 'boulder' },
-    { text: 'dwayne johnson', isImage: true, isURL: true, url: 'images/4x3_puzz_2_images/dwayne_johnson.png', x: 230, y: 425, group: 'Rock', w: 105, h: 105, label: 'dwayne johnson' },
-    { text: 'Spinal Tap', isImage: false, isURL: false, x: 620, y: 130, group: 'Rock', w: 100, h: 50, label: 'Spinal Tap' },
+    { text: 'flying v guitar', isImage: true, isURL: true, url: 'images/4x3_puzz_3_images/flying_v.png', x: 500, y: 333, group: 'Rock', w: 105, h: 105, label: 'flying v guitar' },
+    { text: 'dwayne johnson', isImage: true, isURL: true, url: 'images/4x3_puzz_3_images/dwayne_johnson.png', x: 50, y: 130, group: 'Rock', w: 105, h: 105, label: 'dwayne johnson' },
+    { text: 'Igneous', isImage: false, x: 23, y: 330, group: 'Rock', w: 115, h: 50, label: 'Igneous' },
     
-    // Balance
-    { text: 'balance beam', isImage: true, isURL: true, url: 'images/4x3_puzz_2_images/balance_beam.png', x: 480, y: 130, group: 'Balance', w: 105, h: 105, label: 'balance beam' },
-    { text: 'Work-Life Balance', isImage: false, x: 125, y: 260, group: 'Balance', w: 135, h: 50, label: 'Work-Life Balance' },
-    { text: 'scale of justice', isImage: true, isURL: true, url: 'images/4x3_puzz_2_images/scale_of_justice.png', x: 640, y: 275, group: 'Balance', w: 105, h: 105, label: 'scale of justice' },
+    // Eating
+    { text: 'mouth', isImage: true, isURL: true, url: 'images/4x3_puzz_3_images/mouth.png', x: 322, y: 300, group: 'Eating', w: 105, h: 105, label: 'mouth' },
+    { text: 'cafeteria sign', isImage: true, isURL: true, url: 'images/4x3_puzz_3_images/cafeteria_sign.png', x: 230, y: 425, group: 'Eating', w: 105, h: 105, label: 'cafeteria sign' },
+    { text: 'cunnilingus gesture', isImage: true, isURL: true, url:'images/4x3_puzz_3_images/cunnilingus_gesture.png', x: 620, y: 145, group: 'Eating', w: 105, h: 105, label: 'cunnilingus gesture' },
+    
+    // Fetish
+    { text: 'BDSM mask', isImage: true, isURL: true, url: 'images/4x3_puzz_3_images/bdsm_mask.png', x: 480, y: 130, group: 'Fetish', w: 105, h: 105, label: 'BDSM mask' },
+    { text: 'Roleplay', isImage: false, x: 125, y: 260, group: 'Fetish', w: 135, h: 50, label: 'Roleplay' },
+    { text: 'feet', isImage: true, isURL: true, url: 'images/4x3_puzz_3_images/feet.png', x: 640, y: 275, group: 'Fetish', w: 105, h: 105, label: 'feet' },
 ];
 
 let imageCache = {};
@@ -81,7 +81,7 @@ for (let item of items) {
 }
 
 // Load win screen image
-winImage = loadImageFromURL('images/4x3_puzz_2_images/stonehenge.png', 'winImage');
+winImage = loadImageFromURL('images/4x3_puzz_3_images/salt.png', 'winImage');
 winImage.onload = function() {
     winImageLoaded = true;
 };
@@ -374,8 +374,7 @@ function draw() {
     text('🚨 TRUTH REVEALED! 🚨', width / 2, height / 2 - 30);
     textStyle(NORMAL);
     textSize(24);
-    text('Conspiracy: ALIENS BUILT STONEHENGE TO TEACH HUMANS', width / 2, height / 2 + 20);
-    text('HOW TO BALANCE ONE ROCK ON TOP OF TWO ROCKS', width / 2, height / 2 + 50);
+    text('Conspiracy: SALT IS A ROCK WITH A VORE FETISH', width / 2, height / 2 + 20);
     //textSize(20);
     //text('Final Score: ' + score + ' points', width / 2, height / 2 + 60);
     textSize(16);
@@ -409,13 +408,12 @@ function draw() {
     text('💔 GAME OVER 💔', width / 2, height / 2 - 40);
     textStyle(NORMAL);
     textSize(24);
-    text('Conspiracy: ALIENS BUILT STONEHENGE TO TEACH HUMANS', width / 2, height / 2 + 20);
-    text('HOW TO BALANCE ONE ROCK ON TOP OF TWO ROCKS', width / 2, height / 2 + 50);
+    text('Conspiracy: SALT IS A ROCK WITH A VORE FETISH', width / 2, height / 2 + 20);
     textSize(16);
-    text('Alien: \'alien\' poster, ufo, alf', width / 2, height / 2 + 100);
-    text('Teach: blackboard, lecture hall, abc blocks', width / 2, height / 2 + 120);
-    text('Rock: boulder, dwayne \'the rock\' johnson, spinal tap', width / 2, height / 2 + 140);
-    text('Balance: balance beam, scale of justice, work-life balance', width / 2, height / 2 + 160);
+    text('Salt: morton salt, nacl (sodium), veruca salt', width / 2, height / 2 + 100);
+    text('Rock: flying v guitar, igneous, dwayne \'the rock\' johnson', width / 2, height / 2 + 120);
+    text('Eating: mouth, cafeteria sign, cunnilingus gesture', width / 2, height / 2 + 140);
+    text('Fetish: bdsm mask, roleplay, feet', width / 2, height / 2 + 160);
     // textSize(20);
     // text('Score: ' + score + ' points', width / 2, height / 2 + 60);
     textSize(16);
@@ -483,9 +481,10 @@ function draw() {
     noStroke();
     textAlign(LEFT, CENTER);
     textSize(16);
-    text('"Now let me lay something HEAVY on you:', descBoxX + 70, descBoxY + descBoxHeight / 2.8);
-    text('We are NOT alone."', descBoxX + 70, descBoxY + descBoxHeight / 2);
-    text('                                                     - E', descBoxX + 70, descBoxY + descBoxHeight / 1.55);
+    text('"It makes your food TASTE better.', descBoxX + 70, descBoxY + descBoxHeight / 2.8);
+    text('Which makes you more likely to eat it.', descBoxX + 70, descBoxY + descBoxHeight / 2);
+    text('And that is EXACTLY what it wants."', descBoxX + 70, descBoxY + descBoxHeight / 1.55);
+    text('                                                     - E', descBoxX + 70, descBoxY + descBoxHeight / 1.15);
     
     // Image box overlapping left side - ROTATED
     let imageBoxSize = 80;

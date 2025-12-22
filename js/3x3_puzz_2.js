@@ -586,7 +586,7 @@ function mouseReleased() {
         if (dragging === lastItem) {
         // Must continue from last item in chain
         // Block if chain already has 3 items
-        if (!currentChain.includes(target) && !targetUsed && currentChain.length < 4) { // 4 LINE, 4 if 4x4, else 3
+        if (!currentChain.includes(target) && !targetUsed && currentChain.length < 3) { // 4 LINE, 4 if 4x4, else 3
             currentChain.push(target);
         }
         }

@@ -369,7 +369,7 @@ function draw() {
     text('🚨 TRUTH REVEALED! 🚨', width / 2, height / 2 - 30);
     textStyle(NORMAL);
     textSize(24);
-    text('Conspiracy: The Las Vegas Sphere is flat', width / 2, height / 2 + 20);
+    text('Conspiracy: THE LAS VEGAS SPHERE IS FLAT', width / 2, height / 2 + 20);
     //textSize(20);
     //text('Final Score: ' + score + ' points', width / 2, height / 2 + 60);
     textSize(16);
@@ -403,10 +403,10 @@ function draw() {
     text('💔 GAME OVER 💔', width / 2, height / 2 - 40);
     textStyle(NORMAL);
     textSize(24);
-    text('Conspiracy: The Las Vegas Sphere is flat', width / 2, height / 2 + 20);
+    text('Conspiracy: THE LAS VEGAS SPHERE IS FLAT', width / 2, height / 2 + 20);
     textSize(16);
-    text('Spheres: moon, crystal ball, movie poster from the film "sphere"', width / 2, height / 2 + 60);
-    text('Las Vegas: elvis, neon sign, slot machine', width / 2, height / 2 + 80);
+    text('Sphere: moon, crystal ball, movie poster from the film "sphere"', width / 2, height / 2 + 60);
+    text('Las Vegas: elvis, neon, slot machine', width / 2, height / 2 + 80);
     text('Flat: gingerbread cookie, roadkill, uk apartment', width / 2, height / 2 + 100);
     // textSize(20);
     // text('Score: ' + score + ' points', width / 2, height / 2 + 60);

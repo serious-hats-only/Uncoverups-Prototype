@@ -35,7 +35,7 @@ let feedback = null;
 let feedbackTimer = 0;
 let gameWon = false;
 let gameLost = false;
-let triesRemaining = 4; // 4 LINE
+let triesRemaining = 4; // 4 LINE, 3 if 3x3, else 4
 let submitButton = { x: 350, y: 545, w: 100, h: 40 };
 
 // Placeholder image for description box
@@ -45,6 +45,14 @@ let placeholderImageLoaded = false;
 // Win screen trophy image
 let winImage = null;
 let winImageLoaded = false;
+
+// Background texture
+let bgTexture = null;
+let bgTextureLoaded = false;
+
+// Push pin image
+let pushPinImage = null;
+let pushPinImageLoaded = false;
 
 // Load images using native JavaScript instead of p5.js preload
 function loadImageFromURL(url, key) {
@@ -84,6 +92,22 @@ placeholderImage.onload = function() {
     placeholderImageLoaded = true;
 };
 
+// Load background texture
+bgTexture = loadImageFromURL('images/cork_board.png', 'bgTexture');
+bgTexture.onload = function() {
+    bgTextureLoaded = true;
+};
+
+// Load push pin image
+    // Replace with file path: '/images/red_pin.png' for image
+    // Using a simple circle as placeholder
+    pushPinImage = new Image();
+    pushPinImage.onload = function() {
+      pushPinImageLoaded = true;
+    };
+    // Simple colored circle
+    pushPinImage.src = 'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyMCAyMCI+PGNpcmNsZSBjeD0iMTAiIGN5PSIxMCIgcj0iOCIgZmlsbD0iI2VmNDQ0NCIgc3Ryb2tlPSIjYjkxYzFjIiBzdHJva2Utd2lkdGg9IjEuNSIvPjwvc3ZnPg==';
+
 function setup() {
     let canvas = createCanvas(800, 750);
     canvas.parent('sketch-container');
@@ -92,7 +116,30 @@ function setup() {
 }
 
 function draw() {
+    // Draw repeating background texture or fallback to solid color
+    if (bgTexture && bgTextureLoaded) {
+    // Create repeating pattern
+    try {
+        let pattern = drawingContext.createPattern(bgTexture, 'repeat');
+        drawingContext.fillStyle = pattern;
+        drawingContext.fillRect(0, 0, width, height);
+    } catch(e) {
+        // Fallback to white background if pattern fails
+        background(250);
+    }
+    } else {
+    // White background while texture loads
     background(250);
+    }
+
+    // White box behind title
+    fill(255);
+    noStroke();
+    let titleBoxWidth = 420;
+    let titleBoxHeight = 90;
+    let titleBoxX = (width - titleBoxWidth) / 2;
+    let titleBoxY = 10;
+    rect(titleBoxX, titleBoxY, titleBoxWidth, titleBoxHeight, 8);
     
     // Title at top
     fill(0);
@@ -113,21 +160,32 @@ function draw() {
     // textSize(14);
     // text('Correct chains: ' + completedChains.length + ' / 4', 10, 90);
     // text('Current chain: ' + currentChain.length + ' / 4 items', 10, 110);
+
+    // White box behind tries/hearts section
+    fill(255);
+    noStroke();
+    let triesBoxWidth = 140;
+    let triesBoxHeight = 55;
+    let triesBoxX = width - triesBoxWidth - 12;
+    let triesBoxY = 45;
+    rect(triesBoxX, triesBoxY, triesBoxWidth, triesBoxHeight, 8);
     
     // Draw tries remaining (hearts)
-    textAlign(RIGHT, TOP);
+    textAlign(LEFT, TOP);
     textSize(14);
     fill(0);
-    text('Tries:', width - 120, 90);
+    textStyle(BOLD);
+    text('Tries:', width - 140, 55);
+    textStyle(NORMAL);
     
-    for (let i = 0; i < 4; i++) { // 4 LINE
+    for (let i = 0; i < 4; i++) { // 4 LINE, 3 if 3x3, else 4
     textSize(24);
     if (i < triesRemaining) {
         fill(239, 68, 68); // Red heart for remaining tries
-        text('❤️', width - 85 + (i * 28), 84);
+        text('❤️', width - 143 + (i * 28), 70);
     } else {
         fill(200); // Gray heart for used tries
-        text('🖤', width - 85 + (i * 28), 84);
+        text('🖤', width - 143 + (i * 28), 70);
     }
     }
     
@@ -137,36 +195,6 @@ function draw() {
     textSize(18);
     fill(feedback.correct ? color(34, 197, 94) : color(239, 68, 68));
     text(feedback.message, width / 2, 80);
-    }
-    
-    // Draw completed chains (green, verified correct)
-    strokeWeight(3);
-    for (let chain of completedChains) {
-    stroke(34, 197, 94);
-    for (let i = 0; i < chain.length - 1; i++) {
-        let fromCenter = getCenter(chain[i]);
-        let toCenter = getCenter(chain[i + 1]);
-        line(fromCenter.x, fromCenter.y, toCenter.x, toCenter.y);
-    }
-    }
-    
-    // Draw current chain connections (blue, not yet verified)
-    strokeWeight(3);
-    stroke(255, 0, 0); // orig: 102, 126, 234
-    for (let i = 0; i < currentChain.length - 1; i++) {
-        let fromCenter = getCenter(currentChain[i]);
-        let toCenter = getCenter(currentChain[i + 1]);
-        line(fromCenter.x, fromCenter.y, toCenter.x, toCenter.y);
-    }
-    
-    // Draw dragging line
-    if (dragging) {
-        stroke(255, 0, 0); // orig: 102, 126, 234
-        strokeWeight(2);
-        drawingContext.setLineDash([5, 5]);
-        let fromCenter = getCenter(dragging);
-        line(fromCenter.x, fromCenter.y, dragX, dragY);
-        drawingContext.setLineDash([]);
     }
     
     // Draw items
@@ -230,14 +258,69 @@ function draw() {
     // Chain position indicator
     if (isInCurrentChain) {
         let pos = currentChain.indexOf(item) + 1;
-        fill(102, 126, 234);
-        textSize(10);
-        text(pos, item.x + item.w - 12, item.y + 12);
+        textStyle(BOLD)
+        fill(255, 0, 0);
+        // fill(102, 126, 234);
+        textSize(14);
+        text(pos, item.x + item.w - 15, item.y + 15);
+        textStyle(NORMAL)
+    }
+
+    // Draw push pin at top center of item box
+    if (pushPinImage && pushPinImageLoaded) {
+        try {
+        let pinSize = 12;
+        let pinX = item.x + item.w / 2 - pinSize / 2;
+        let pinY = item.y - pinSize / 2; // Half above the box
+        drawingContext.drawImage(pushPinImage, pinX, pinY, pinSize, pinSize);
+        } catch(e) {
+        // Fallback to simple circle
+        fill(239, 68, 68);
+        stroke(185, 28, 28);
+        strokeWeight(1.5);
+        circle(item.x + item.w / 2, item.y, 8);
+        }
+    } else {
+        // Fallback push pin circle while loading
+        fill(239, 68, 68);
+        stroke(185, 28, 28);
+        strokeWeight(1.5);
+        circle(item.x + item.w / 2, item.y, 8);
+    }
+    }
+
+    // Draw completed chains (green, verified correct)
+    strokeWeight(3);
+    for (let chain of completedChains) {
+    stroke(34, 197, 94);
+    for (let i = 0; i < chain.length - 1; i++) {
+        let fromCenter = getCenter(chain[i]);
+        let toCenter = getCenter(chain[i + 1]);
+        line(fromCenter.x, fromCenter.y, toCenter.x, toCenter.y);
     }
     }
     
-    // Submit button AFTER items so it draws on top (only show when current chain has 3 items)
-    if (currentChain.length === 3 && !gameWon && !gameLost) {
+    // Draw current chain connections (blue, not yet verified)
+    strokeWeight(3);
+    stroke(255, 0, 0); // orig: 102, 126, 234
+    for (let i = 0; i < currentChain.length - 1; i++) {
+        let fromCenter = getCenter(currentChain[i]);
+        let toCenter = getCenter(currentChain[i + 1]);
+        line(fromCenter.x, fromCenter.y, toCenter.x, toCenter.y);
+    }
+
+    // Draw dragging line
+    if (dragging) {
+        stroke(255, 0, 0); // orig: 102, 126, 234
+        strokeWeight(2);
+        drawingContext.setLineDash([5, 5]);
+        let fromCenter = getCenter(dragging);
+        line(fromCenter.x, fromCenter.y, dragX, dragY);
+        drawingContext.setLineDash([]);
+    }
+    
+    // Submit button AFTER items so it draws on top (only show when current chain has 4 items)
+    if (currentChain.length === 3 && !gameWon && !gameLost) { // 4 LINE, 4 if 4x4, else 3
         let isHovered = mouseX > submitButton.x && 
                         mouseX < submitButton.x + submitButton.w &&
                         mouseY > submitButton.y && 
@@ -291,8 +374,8 @@ function draw() {
     text('🚨 TRUTH REVEALED! 🚨', width / 2, height / 2 - 30);
     textStyle(NORMAL);
     textSize(24);
-    text('Conspiracy: When you crush a candy in the game,', width / 2, height / 2 + 20);
-    text('one also gets crushed in real life', width / 2, height / 2 + 60);
+    text('Conspiracy: WHEN YOU CRUSH A CANDY IN THE GAME,', width / 2, height / 2 + 20);
+    text('ONE ALSO GETS CRUSHED IN REAL LIFE', width / 2, height / 2 + 60);
     //textSize(20);
     //text('Final Score: ' + score + ' points', width / 2, height / 2 + 60);
     textSize(16);
@@ -326,8 +409,8 @@ function draw() {
     text('💔 GAME OVER 💔', width / 2, height / 2 - 40);
     textStyle(NORMAL);
     textSize(24);
-    text('Conspiracy: When you crush a candy in the game,', width / 2, height / 2 + 20);
-    text('one also gets crushed in real life', width / 2, height / 2 + 50);
+    text('Conspiracy: WHEN YOU CRUSH A CANDY IN THE GAME,', width / 2, height / 2 + 20);
+    text('ONE ALSO GETS CRUSHED IN REAL LIFE', width / 2, height / 2 + 60);
     textSize(16);
     text('Candy: john candy, sucking candy, halloween movie', width / 2, height / 2 + 100);
     text('Game: the game movie, pickup artist, game over', width / 2, height / 2 + 120);
@@ -372,9 +455,9 @@ function draw() {
     
     fill(50);
     textSize(13);
-    text('• Click and drag to connect 3 related items', 20, 655);
+    text('• Click and drag to make chains of 3 related items', 20, 655);
     text('• Click SUBMIT to check if correct. You have 4 tries', 20, 675);
-    text('• Find 4 correct chains to expose the conspiracy', 20, 695);
+    text('• Find 4 correct groups to expose the conspiracy', 20, 695);
     text('• Press \'R\' to reset game, \'U\' to undo last connection', 20, 715);
 
     // Description box with image - light orange horizontal box
@@ -402,7 +485,8 @@ function draw() {
     textSize(16);
     text('"Just some wholesome FUN to pass the', descBoxX + 70, descBoxY + descBoxHeight / 2.8);
     text('time, eh? The truth is far more HEINOUS', descBoxX + 70, descBoxY + descBoxHeight / 2);
-    text('than you could ever imagine, SWEETIE.', descBoxX + 70, descBoxY + descBoxHeight / 1.55);
+    text('than you could ever imagine, SWEETIE."', descBoxX + 70, descBoxY + descBoxHeight / 1.55);
+    text('                                                     - E', descBoxX + 70, descBoxY + descBoxHeight / 1.2);
     
     // Image box overlapping left side - ROTATED
     let imageBoxSize = 80;
@@ -449,7 +533,7 @@ function draw() {
 
 function mousePressed() {
     // Check if clicking submit button
-    if (currentChain.length === 3 && !gameWon && !gameLost && // 4 LINE
+    if (currentChain.length === 3 && !gameWon && !gameLost && // 4 LINE, 4 if 4x4, else 3
         mouseX > submitButton.x && 
         mouseX < submitButton.x + submitButton.w &&
         mouseY > submitButton.y && 
@@ -509,7 +593,7 @@ function mouseReleased() {
         if (dragging === lastItem) {
         // Must continue from last item in chain
         // Block if chain already has 3 items
-        if (!currentChain.includes(target) && !targetUsed && currentChain.length < 3) { // 4 LINE
+        if (!currentChain.includes(target) && !targetUsed && currentChain.length < 3) { // 4 LINE, 4 if 4x4, else 3
             currentChain.push(target);
         }
         }
@@ -520,7 +604,7 @@ function mouseReleased() {
 }
 
 function submitChain() {
-    if (currentChain.length !== 3) return; // 4 LINE
+    if (currentChain.length !== 3) return; // 4 LINE, 4 if 4x4, else 3
     
     // Check if all items in chain have same group
     let firstGroup = currentChain[0].group;
@@ -538,7 +622,7 @@ function submitChain() {
     currentChain = [];
     
     // Check if game is won
-    if (completedChains.length === 4) {  // 4 LINE
+    if (completedChains.length === 4) {  // 4 LINE, 3 if 3x3, else 4
         gameWon = true;
         feedback = { message: '🎉 You won! All chains correct!', correct: true };
         feedbackTimer = millis() + 5000;
@@ -569,7 +653,7 @@ function keyPressed() {
     feedback = null;
     gameWon = false;
     gameLost = false;
-    triesRemaining = 4; // 4 LINE
+    triesRemaining = 4; // 4 LINE, 3 if 3x3, else 4
     } else if (key === 'u' || key === 'U') {
     if (currentChain.length > 0 && !gameWon && !gameLost) {
         currentChain.pop();

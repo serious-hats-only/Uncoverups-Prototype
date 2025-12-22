@@ -1,28 +1,28 @@
 // Game state - mix of text and emoji/symbols as images
 let items = [
     // Boats
-    { text: 'speedboat', isImage: true, isURL: true, url: 'images/4x4_puzz_2_images/TBD.png', x: 62, y: 410, group: 'Boats', w: 105, h: 105, label: 'speedboat' },
-    { text: 'gravy boat', isImage: true, isURL: true, url: 'images/4x4_puzz_2_images/TBD.png', x: 330, y: 175, group: 'Boats', w: 105, h: 105, label: 'gravy boat' },
-    { text: 'banana boat', isImage: true, isURL: true, url: 'images/4x4_puzz_2_images/TBD.png', x: 389, y: 436, group: 'Boats', w: 105, h: 105, label: 'banana boat' },
-    { text: 'Aircraft Carrier', isImage: false, x: 450, y: 250, group: 'Boats', w: 95, h: 50, label: 'Aircraft Carrier' },
+    { text: 'speedboat', isImage: true, isURL: true, url: 'images/4x4_puzz_2_images/speedboat.png', x: 62, y: 410, group: 'Boats', w: 105, h: 105, label: 'speedboat' },
+    { text: 'gravy boat', isImage: true, isURL: true, url: 'images/4x4_puzz_2_images/gravy_boat.png', x: 330, y: 175, group: 'Boats', w: 105, h: 105, label: 'gravy boat' },
+    { text: 'banana boat', isImage: true, isURL: true, url: 'images/4x4_puzz_2_images/banana_boat.png', x: 389, y: 436, group: 'Boats', w: 105, h: 105, label: 'banana boat' },
+    { text: 'Aircraft Carrier', isImage: false, x: 450, y: 250, group: 'Boats', w: 115, h: 50, label: 'Aircraft Carrier' },
     
     // Lost
-    { text: 'lost and found', isImage: true, isURL: true, url: 'images/4x4_puzz_2_images/TBD.png', x: 500, y: 333, group: 'Lost', w: 105, h: 105, label: 'lost and found' },
-    { text: 'lost in translation', isImage: true, isURL: true, url: 'images/4x4_puzz_2_images/TBD.png', x: 50, y: 130, group: 'Lost', w: 105, h: 105, label: 'lost in translation' },
-    { text: '______ Generation', isImage: false, x: 23, y: 330, group: 'Lost', w: 115, h: 50, label: '______ Generation' },
-    { text: 'broken compass', isImage: true, isURL: true, url: 'images/4x4_puzz_2_images/TBD.png', x: 190, y: 275, group: 'Lost', w: 105, h: 105, label: 'broken compass' },
+    { text: 'lost and found', isImage: true, isURL: true, url: 'images/4x4_puzz_2_images/lost_found.png', x: 500, y: 333, group: 'Lost', w: 105, h: 105, label: 'lost and found' },
+    { text: 'lost in translation', isImage: true, isURL: true, url: 'images/4x4_puzz_2_images/lost_translation.png', x: 50, y: 130, group: 'Lost', w: 105, h: 105, label: 'lost in translation' },
+    { text: '______ Generation', isImage: false, x: 23, y: 330, group: 'Lost', w: 135, h: 50, label: '______ Generation' },
+    { text: 'broken compass', isImage: true, isURL: true, url: 'images/4x4_puzz_2_images/broken_compass.png', x: 190, y: 275, group: 'Lost', w: 105, h: 105, label: 'broken compass' },
     
     // Bermuda
-    { text: 'bermuda flag', isImage: true, isURL: true, url: 'images/4x4_puzz_2_images/TBD.png', x: 322, y: 300, group: 'Bermuda', w: 105, h: 105, label: 'bermuda flag' },
-    { text: 'bermuda shorts', isImage: true, isURL: true, url: 'images/4x4_puzz_2_images/TBD.png', x: 230, y: 425, group: 'Bermuda', w: 105, h: 105, label: 'bermuda shorts' },
-    { text: 'Bermuda Grass', isImage: false, isURL: false, x: 620, y: 130, group: 'Bermuda', w: 150, h: 50, label: 'Bermuda Grass' },
-    { text: 'bermuda island', isImage: true, isURL: true, url: 'images/4x4_puzz_2_images/TBD.png', x: 210, y: 150, group: 'Bermuda', w: 105, h: 105, label: 'bermuda island' },
+    { text: 'bermuda flag', isImage: true, isURL: true, url: 'images/4x4_puzz_2_images/bermuda_flag.png', x: 322, y: 300, group: 'Bermuda', w: 105, h: 105, label: 'bermuda flag' },
+    { text: 'bermuda shorts', isImage: true, isURL: true, url: 'images/4x4_puzz_2_images/bermuda_shorts.png', x: 230, y: 425, group: 'Bermuda', w: 105, h: 105, label: 'bermuda shorts' },
+    { text: 'Bermuda Grass', isImage: false, isURL: false, x: 620, y: 130, group: 'Bermuda', w: 125, h: 50, label: 'Bermuda Grass' },
+    { text: 'bermuda island', isImage: true, isURL: true, url: 'images/4x4_puzz_2_images/bermuda_island.png', x: 210, y: 150, group: 'Bermuda', w: 105, h: 105, label: 'bermuda island' },
     
     // Triangle
-    { text: 'dorito', isImage: true, isURL: true, url: 'images/4x4_puzz_2_images/TBD.png', x: 480, y: 130, group: 'Triangle', w: 105, h: 105, label: 'dorito' },
+    { text: 'dorito', isImage: true, isURL: true, url: 'images/4x4_puzz_2_images/dorito.png', x: 480, y: 130, group: 'Triangle', w: 105, h: 105, label: 'dorito' },
     { text: 'Pool Rack', isImage: false, x: 50, y: 260, group: 'Triangle', w: 85, h: 50, label: 'Pool Rack' },
-    { text: 'Research Triangle', isImage: false, x: 640, y: 320, group: 'Triangle', w: 85, h: 50, label: 'Research Triangle' },
-    { text: 'waterski pyramid', isImage: true, isURL: true, url: 'images/4x4_puzz_2_images/TBD.png', x: 620, y: 205, group: 'Triangle', w: 105, h: 105, label: 'waterski pyramid' }
+    { text: 'Research Triangle', isImage: false, x: 640, y: 320, group: 'Triangle', w: 135, h: 50, label: 'Research Triangle' },
+    { text: 'waterski pyramid', isImage: true, isURL: true, url: 'images/4x4_puzz_2_images/ski_pyramid.png', x: 620, y: 205, group: 'Triangle', w: 105, h: 105, label: 'waterski pyramid' }
 ];
 
 let imageCache = {};
@@ -378,7 +378,8 @@ function draw() {
     text('🚨 TRUTH REVEALED! 🚨', width / 2, height / 2 - 30);
     textStyle(NORMAL);
     textSize(24);
-    text('Conspiracy: BOATS LOST IN THE BERMUDA TRIANGLE END UP IN MARGARITAVILLE', width / 2, height / 2 + 20);
+    text('Conspiracy: BOATS LOST IN THE BERMUDA TRIANGLE', width / 2, height / 2 + 20);
+    text('END UP IN MARGARITAVILLE', width / 2, height / 2 + 50);
     //textSize(20);
     //text('Final Score: ' + score + ' points', width / 2, height / 2 + 60);
     textSize(16);
@@ -412,7 +413,8 @@ function draw() {
     text('💔 GAME OVER 💔', width / 2, height / 2 - 40);
     textStyle(NORMAL);
     textSize(24);
-    text('Conspiracy: BOATS LOST IN THE BERMUDA TRIANGLE END UP IN MARGARITAVILLE', width / 2, height / 2 + 20);
+    text('Conspiracy: BOATS LOST IN THE BERMUDA TRIANGLE', width / 2, height / 2 + 20);
+    text('END UP IN MARGARITAVILLE', width / 2, height / 2 + 50);
     textSize(16);
     text('Boats: speedboat, aircraft carrier, gravy boat, banana boat logo', width / 2, height / 2 + 100);
     text('Lost: lost and found, __(lost)__ generation, lost in translation, broken compass', width / 2, height / 2 + 120);
@@ -485,10 +487,11 @@ function draw() {
     noStroke();
     textAlign(LEFT, CENTER);
     textSize(16);
-    text('"One of history\'s greatest mysteries isn\'t very complicated', descBoxX + 70, descBoxY + descBoxHeight / 2.8);
-    text('if you READ between the lines: \'Searchin\' for my lost shaker.', descBoxX + 70, descBoxY + descBoxHeight / 2);
-    text('of salt\'? Come on."', descBoxX + 70, descBoxY + descBoxHeight / 1.55);
-    text('                                                     - E', descBoxX + 70, descBoxY + descBoxHeight / 1.25);
+    text('"One of history\'s GREATEST mysteries isn\'t', descBoxX + 70, descBoxY + descBoxHeight / 2.8);
+    text('very complicated if you READ between ', descBoxX + 70, descBoxY + descBoxHeight / 2);
+    text('the lines: \'Searchin\' for my lost shaker', descBoxX + 70, descBoxY + descBoxHeight / 1.55);
+    text('of salt\'? COME ON!"', descBoxX + 70, descBoxY + descBoxHeight / 1.25);
+    text('                                                      - E', descBoxX + 70, descBoxY + descBoxHeight / 1.1);
     
     // Image box overlapping left side - ROTATED
     let imageBoxSize = 80;

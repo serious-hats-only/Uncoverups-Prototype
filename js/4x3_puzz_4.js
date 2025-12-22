@@ -18,7 +18,7 @@ let items = [
     // Fear
     { text: 'scared emoji', isImage: true, isURL: true, url: 'images/4x3_puzz_4_images/scared_emoji.png', x: 480, y: 130, group: 'Fear', w: 105, h: 105, label: 'scared emoji' },
     { text: 'Horror Movie', isImage: false, x: 125, y: 260, group: 'Fear', w: 135, h: 50, label: 'Horror Movie' },
-    { text: 'scary shadow', isImage: true, isURL: true, url: 'images/4x3_puzz_4_images/scary_shadowd.png', x: 640, y: 275, group: 'Fear', w: 105, h: 105, label: 'scary shadow' },
+    { text: 'scary shadow', isImage: true, isURL: true, url: 'images/4x3_puzz_4_images/scary_shadow.png', x: 640, y: 275, group: 'Fear', w: 105, h: 105, label: 'scary shadow' },
 ];
 
 let imageCache = {};
@@ -374,8 +374,8 @@ function draw() {
     text('🚨 TRUTH REVEALED! 🚨', width / 2, height / 2 - 30);
     textStyle(NORMAL);
     textSize(24);
-    text('Conspiracy: BILLIARD CHALK IS GROUND UP POOL', width / 2, height / 2 + 20);
-    text('BALLS AND WORKS BY INSTILLING FEAR INTO THEM', width / 2, height / 2 + 50);
+    text('Conspiracy: BILLIARD CHALK IS GROUND UP POOL BALLS', width / 2, height / 2 + 20);
+    text('AND IT WORKS BY INSTILLING FEAR INTO THEM', width / 2, height / 2 + 50);
     //textSize(20);
     //text('Final Score: ' + score + ' points', width / 2, height / 2 + 60);
     textSize(16);
@@ -409,8 +409,8 @@ function draw() {
     text('💔 GAME OVER 💔', width / 2, height / 2 - 40);
     textStyle(NORMAL);
     textSize(24);
-    text('Conspiracy: BILLIARD CHALK IS GROUND UP POOL', width / 2, height / 2 + 20);
-    text('BALLS AND WORKS BY INSTILLING FEAR INTO THEM', width / 2, height / 2 + 50);
+    text('Conspiracy: BILLIARD CHALK IS GROUND UP POOL BALLS', width / 2, height / 2 + 20);
+    text('AND IT WORKS BY INSTILLING FEAR INTO THEM', width / 2, height / 2 + 50);
     textSize(16);
     text('Billiard: pool shark, q, billiard balls', width / 2, height / 2 + 100);
     text('Chalk: chalk board, chalk outline, climbing chalk', width / 2, height / 2 + 120);
@@ -484,8 +484,8 @@ function draw() {
     textAlign(LEFT, CENTER);
     textSize(16);
     text('"Don\'t be fooled by the pretense of', descBoxX + 70, descBoxY + descBoxHeight / 2.8);
-    text('INNOCENT recreation. The LIGHT colors.', descBoxX + 70, descBoxY + descBoxHeight / 2);
-    text('are hiding a DARK secret."', descBoxX + 70, descBoxY + descBoxHeight / 1.55);
+    text('INNOCENT recreation. The LIGHT', descBoxX + 70, descBoxY + descBoxHeight / 2);
+    text('colors are hiding a DARK secret."', descBoxX + 70, descBoxY + descBoxHeight / 1.55);
     text('                                                     - E', descBoxX + 70, descBoxY + descBoxHeight / 1.15);
     
     // Image box overlapping left side - ROTATED
@@ -593,7 +593,7 @@ function mouseReleased() {
         if (dragging === lastItem) {
         // Must continue from last item in chain
         // Block if chain already has 3 items
-        if (!currentChain.includes(target) && !targetUsed && currentChain.length < 4) { // 4 LINE, 4 if 4x4, else 3
+        if (!currentChain.includes(target) && !targetUsed && currentChain.length < 3) { // 4 LINE, 4 if 4x4, else 3
             currentChain.push(target);
         }
         }

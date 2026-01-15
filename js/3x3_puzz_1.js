@@ -8,12 +8,12 @@ let items = [
     // Circles
     { text: 'moon', isImage: true, isURL: true, url: 'images/3x3_puzz_1_images/moon.png', x: 240, y: 320, group: 'sphere', w: 105, h: 105, label: 'The Moon' },
     { text: 'sphere_poster', isImage: true, isURL: true, url: 'images/3x3_puzz_1_images/sphere_poster.png', x: 50, y: 130, group: 'sphere', w: 105, h: 105, label: 'Sphere Poster' },
-    { text: 'Crystal Ball', isImage: false, x: 450, y: 290, group: 'sphere', w: 95, h: 50 },
+    { text: 'Bingo Ball', isImage: false, x: 450, y: 290, group: 'sphere', w: 95, h: 50, label: 'Bingo Ball'},
     
     // Flat
     { text: 'gingerbread', isImage: true, isURL: true, url: 'images/3x3_puzz_1_images/ginger_cookie.png', x: 480, y: 130, group: 'flat', w: 105, h: 105, label: 'Gingerbread Man' },
-    { text: 'Roadkill', isImage: false, x: 50, y: 260, group: 'flat', w: 85, h: 50 },
-    { text: 'UK Apartment', isImage: false, x: 640, y: 220, group: 'flat', w: 125, h: 50 }
+    { text: 'Roadkill', isImage: false, x: 50, y: 260, group: 'flat', w: 85, h: 50, label: 'Roadkill' },
+    { text: 'UK Apartment', isImage: false, x: 640, y: 220, group: 'flat', w: 125, h: 50, label: 'UK Apartment' }
 ];
 
 let imageCache = {};
@@ -32,6 +32,7 @@ let gameWon = false;
 let gameLost = false;
 let triesRemaining = 3; // 4 LINE, 3 if 3x3, else 4
 let submitButton = { x: 350, y: 545, w: 100, h: 40 };
+let submitButtonVisible = false; // changeover step 1
 
 // Placeholder image for description box
 let placeholderImage = null;
@@ -316,6 +317,7 @@ function draw() {
     
     // Submit button AFTER items so it draws on top (only show when current chain has 4 items)
     if (currentChain.length === 3 && !gameWon && !gameLost) { // 4 LINE, 4 if 4x4, else 3
+        submitButtonVisible = true; // changeover step 2
         let isHovered = mouseX > submitButton.x && 
                         mouseX < submitButton.x + submitButton.w &&
                         mouseY > submitButton.y && 
@@ -405,7 +407,7 @@ function draw() {
     textSize(24);
     text('Conspiracy: THE LAS VEGAS SPHERE IS FLAT', width / 2, height / 2 + 20);
     textSize(16);
-    text('Sphere: moon, crystal ball, movie poster from the film "sphere"', width / 2, height / 2 + 60);
+    text('Sphere: moon, bingo ball, movie poster from the film "sphere"', width / 2, height / 2 + 60);
     text('Las Vegas: elvis, neon, slot machine', width / 2, height / 2 + 80);
     text('Flat: gingerbread cookie, roadkill, uk apartment', width / 2, height / 2 + 100);
     // textSize(20);
@@ -447,10 +449,11 @@ function draw() {
     
     fill(50);
     textSize(13);
-    text('• Click and drag to make chains of 3 related items', 20, 655); // 4 LINE
-    text('• Click SUBMIT to check if correct. You have 3 tries', 20, 675);
-    text('• Find 3 correct groups to expose the conspiracy', 20, 695);
-    text('• Press \'R\' to reset game, \'U\' to undo last connection', 20, 715);
+    text('• Click and drag to make chains of 3 related items', 20, 645); // changeover step 3
+    text('• Click SUBMIT or press \'Enter\' to check if correct', 20, 665);
+    text('• Press \'R\' to reset game, \'U\' or \'Esc\' to undo last connection', 20, 685);
+    text('• Find 3 correct groups to expose the conspiracy', 20, 705);
+    text('• You have 3 tries', 20, 725); // changeover step 4
 
     // Description box with image - light orange horizontal box
     let descBoxWidth = 400;
@@ -635,8 +638,11 @@ function submitChain() {
     }
 }
 
-function keyPressed() {
-    if (key === 'r' || key === 'R') {
+function keyPressed() { // changeover step 5
+    if (key === 'Enter' && submitButtonVisible){
+    submitChain();
+    return;
+    } else if (key === 'r' || key === 'R') {
     completedChains = [];
     completedCategories = [];
     currentChain = [];
@@ -644,8 +650,8 @@ function keyPressed() {
     feedback = null;
     gameWon = false;
     gameLost = false;
-    triesRemaining = 3; // 4 LINE, 3 if 3x3, else 4
-    } else if (key === 'u' || key === 'U') {
+    triesRemaining = 3; // 4 LINE, 3 if 3x3, else 4, changeover step 6
+    } else if (key === 'u' || key === 'U' || key === 'Escape') {
     if (currentChain.length > 0 && !gameWon && !gameLost) {
         currentChain.pop();
     }

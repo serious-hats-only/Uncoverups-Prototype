@@ -41,6 +41,7 @@ let gameWon = false;
 let gameLost = false;
 let triesRemaining = 4; // 4 LINE
 let submitButton = { x: 350, y: 545, w: 100, h: 40 };
+let submitButtonVisible = false;
 
 // Placeholder image for description box
 let placeholderImage = null;
@@ -325,6 +326,7 @@ function draw() {
     
     // Submit button AFTER items so it draws on top (only show when current chain has 4 items)
     if (currentChain.length === 4 && !gameWon && !gameLost) { // 4 LINE
+        submitButtonVisible = true;
         let isHovered = mouseX > submitButton.x && 
                         mouseX < submitButton.x + submitButton.w &&
                         mouseY > submitButton.y && 
@@ -457,10 +459,11 @@ function draw() {
     
     fill(50);
     textSize(13);
-    text('• Click and drag to make chains of 4 related items', 20, 655);
-    text('• Click SUBMIT to check if correct. You have 4 tries', 20, 675);
-    text('• Find 4 correct groups to expose the conspiracy', 20, 695);
-    text('• Press \'R\' to reset game, \'U\' to undo last connection', 20, 715);
+    text('• Click and drag to make chains of 4 related items', 20, 645);
+    text('• Click SUBMIT or press \'Enter\' to check if correct', 20, 665);
+    text('• Press \'R\' to reset game, \'U\' or \'Esc\' to undo last connection', 20, 685);
+    text('• Find 4 correct groups to expose the conspiracy', 20, 705);
+    text('• You have 4 tries', 20, 725);
 
     // Description box with image - light orange horizontal box
     let descBoxWidth = 400;
@@ -647,7 +650,10 @@ function submitChain() {
 }
 
 function keyPressed() {
-    if (key === 'r' || key === 'R') {
+    if (key === 'Enter' && submitButtonVisible){
+    submitChain();
+    return;
+    } else if (key === 'r' || key === 'R') {
     completedChains = [];
     completedCategories = [];
     currentChain = [];
@@ -655,8 +661,8 @@ function keyPressed() {
     feedback = null;
     gameWon = false;
     gameLost = false;
-    triesRemaining = 4; // 4 LINE
-    } else if (key === 'u' || key === 'U') {
+    triesRemaining = 4; // 4 LINE, 3 if 3x3, else 4
+    } else if (key === 'u' || key === 'U' || key === 'Escape') {
     if (currentChain.length > 0 && !gameWon && !gameLost) {
         currentChain.pop();
     }

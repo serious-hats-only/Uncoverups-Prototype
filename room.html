@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Dark Room</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.0/p5.min.js"></script>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { background: #000; overflow: hidden; }
+    canvas { display: block; }
+  </style>
+</head>
+<body>
+<script>
+let t = 0;
+let roomBuffer, lightBuffer;
+
+// 3D perspective projection
+// Room in world coords: 0..1 on each axis
+// Camera is slightly above center, looking into room
+
+const CAM = { x: 0.5, y: 0.62, z: -1.5 };
+const FOCAL = 1.3;
+
+function project(wx, wy, wz) {
+  let dx = wx - CAM.x;
+  let dy = wy - CAM.y;
+  let dz = wz - CAM.z;
+  let scale = FOCAL / dz;
+  return {
+    x: width / 2 + dx * scale * width * 0.7,
+    y: height / 2 + dy * scale * width * 0.7,
+    s: scale
+  };
+}
+
+// Room corners in world space
+// Room spans x: 0..1, y: 0..1 (floor=1, ceiling=0), z: 1..3
+const Z_NEAR = 1.05;
+const Z_FAR  = 3.0;
+
+function roomPt(wx, wy, wz) {
+  return project(wx, wy, wz);
+}
+
+function setup() {
+  createCanvas(windowWidth, windowHeight);
+  noStroke();
+}
+
+function draw() {
+  t += 0.010;
+
+  // Slow, gentle pulse
+  let pulse = map(sin(t * 0.9), -1, 1, 0.28, 1.0);
+  // Very subtle flicker
+  if (random() < 0.003) pulse *= random(0.88, 1.08);
+  pulse = constrain(pulse, 0, 1);
+
+  background(0);
+
+  // ---- Project all 8 corners ----
+  // Near plane corners (front wall - not drawn, just clipping)
+  let ftl = roomPt(0, 0, Z_NEAR);
+  let ftr = roomPt(1, 0, Z_NEAR);
+  let fbl = roomPt(0, 1, Z_NEAR);
+  let fbr = roomPt(1, 1, Z_NEAR);
+
+  // Far plane corners (back wall)
+  let btl = roomPt(0, 0, Z_FAR);
+  let btr = roomPt(1, 0, Z_FAR);
+  let bbl = roomPt(0, 1, Z_FAR);
+  let bbr = roomPt(1, 1, Z_FAR);
+
+  // Bulb position (center ceiling, halfway back)
+  let bulbZ = Z_NEAR + (Z_FAR - Z_NEAR) * 0.42;
+  let bulbPt = roomPt(0.5, 0.0, bulbZ);
+
+  // ---- Draw room surfaces with lighting ----
+  // Each surface gets ambient + diffuse based on normal vs light direction
+  // Light is at (0.5, 0.0, bulbZ) in world space
+
+  let lx = 0.5, ly = 0.0, lz = bulbZ;
+
+  function surfaceBrightness(nx, ny, nz, sx, sy, sz) {
+    // vector from surface center to light
+    let dx = lx - sx, dy = ly - sy, dz = lz - sz;
+    let len = Math.sqrt(dx*dx + dy*dy + dz*dz);
+    dx /= len; dy /= len; dz /= len;
+    let dot = nx*dx + ny*dy + nz*dz;
+    dot = max(0, dot);
+    let dist2 = len * len;
+    let atten = 1.0 / (0.3 + 1.8 * dist2);
+    let ambient = 0.04;
+    return (ambient + dot * atten * 1.2) * pulse;
+  }
+
+  // BACK WALL (normal points toward camera: z = -1)
+  {
+    let b = surfaceBrightness(0, 0, -1,  0.5, 0.5, Z_FAR);
+    b = constrain(b, 0, 1);
+    // Gradient: lighter near top-center (closer to light)
+    // Draw as solid then overlay gradient
+    let v = floor(b * 210);
+    fill(v * 0.98, v * 0.98, v);
+    quad(btl.x, btl.y, btr.x, btr.y, bbr.x, bbr.y, bbl.x, bbl.y);
+
+    // Subtle vertical gradient overlay on back wall
+    let gSteps = 30;
+    for (let i = 0; i < gSteps; i++) {
+      let fy0 = i / gSteps;
+      let fy1 = (i + 1) / gSteps;
+      let p0l = roomPt(0, fy0, Z_FAR), p0r = roomPt(1, fy0, Z_FAR);
+      let p1l = roomPt(0, fy1, Z_FAR), p1r = roomPt(1, fy1, Z_FAR);
+      // Brighter near top
+      let extra = map(fy0, 0, 1, 60, 0) * pulse;
+      fill(extra, extra, extra * 0.9, 200);
+      quad(p0l.x, p0l.y, p0r.x, p0r.y, p1r.x, p1r.y, p1l.x, p1l.y);
+    }
+  }
+
+  // LEFT WALL (normal points right: x = +1)
+  {
+    let b = surfaceBrightness(1, 0, 0,  0.0, 0.5, (Z_NEAR+Z_FAR)/2);
+    b = constrain(b, 0, 1);
+    let v = floor(b * 185);
+    fill(v * 0.96, v * 0.96, v);
+    quad(ftl.x, ftl.y, btl.x, btl.y, bbl.x, bbl.y, fbl.x, fbl.y);
+
+    // Gradient strips for depth shading
+    let gSteps = 24;
+    for (let i = 0; i < gSteps; i++) {
+      let fz0 = i / gSteps;
+      let fz1 = (i + 1) / gSteps;
+      let wz0 = Z_NEAR + fz0 * (Z_FAR - Z_NEAR);
+      let wz1 = Z_NEAR + fz1 * (Z_FAR - Z_NEAR);
+      let p0t = roomPt(0, 0, wz0), p1t = roomPt(0, 0, wz1);
+      let p0b = roomPt(0, 1, wz0), p1b = roomPt(0, 1, wz1);
+      // Brighter near bulb z
+      let dz = abs((wz0 + wz1) / 2 - bulbZ);
+      let extra = map(dz, 0, 1.2, 45, 0) * pulse;
+      extra = max(0, extra);
+      fill(extra, extra, extra * 0.9, 200);
+      quad(p0t.x, p0t.y, p1t.x, p1t.y, p1b.x, p1b.y, p0b.x, p0b.y);
+    }
+  }
+
+  // RIGHT WALL (normal points left: x = -1)
+  {
+    let b = surfaceBrightness(-1, 0, 0,  1.0, 0.5, (Z_NEAR+Z_FAR)/2);
+    b = constrain(b, 0, 1);
+    let v = floor(b * 175);
+    fill(v * 0.95, v * 0.95, v);
+    quad(ftr.x, ftr.y, btr.x, btr.y, bbr.x, bbr.y, fbr.x, fbr.y);
+
+    let gSteps = 24;
+    for (let i = 0; i < gSteps; i++) {
+      let fz0 = i / gSteps;
+      let fz1 = (i + 1) / gSteps;
+      let wz0 = Z_NEAR + fz0 * (Z_FAR - Z_NEAR);
+      let wz1 = Z_NEAR + fz1 * (Z_FAR - Z_NEAR);
+      let p0t = roomPt(1, 0, wz0), p1t = roomPt(1, 0, wz1);
+      let p0b = roomPt(1, 1, wz0), p1b = roomPt(1, 1, wz1);
+      let dz = abs((wz0 + wz1) / 2 - bulbZ);
+      let extra = map(dz, 0, 1.2, 40, 0) * pulse;
+      extra = max(0, extra);
+      fill(extra, extra, extra * 0.9, 200);
+      quad(p0t.x, p0t.y, p1t.x, p1t.y, p1b.x, p1b.y, p0b.x, p0b.y);
+    }
+  }
+
+  // FLOOR (normal points up: y = -1)
+  {
+    let b = surfaceBrightness(0, -1, 0,  0.5, 1.0, bulbZ);
+    b = constrain(b, 0, 1);
+    let v = floor(b * 200);
+    fill(v * 0.96, v * 0.96, v);
+    quad(fbl.x, fbl.y, fbr.x, fbr.y, bbr.x, bbr.y, bbl.x, bbl.y);
+
+    // Radial pool of light on floor centered under bulb
+    let bulbFloor = roomPt(0.5, 1.0, bulbZ);
+    let edgeL = roomPt(0.0, 1.0, bulbZ);
+    let poolRX = abs(bulbFloor.x - edgeL.x) * 0.72;
+    let poolRY = poolRX * 0.28;
+    let poolSteps = 28;
+    for (let i = poolSteps; i >= 0; i--) {
+      let frac = i / poolSteps;
+      let r = 1 - frac;
+      let alpha = pow(r, 2.0) * 100 * pulse;
+      let warm = lerp(255, 220, frac);
+      fill(warm, warm, lerp(255, 200, frac), alpha);
+      ellipse(bulbFloor.x, bulbFloor.y, poolRX * 2 * frac, poolRY * 2 * frac);
+    }
+  }
+
+  // CEILING (normal points down: y = +1)
+  {
+    let b = surfaceBrightness(0, 1, 0,  0.5, 0.0, (Z_NEAR+Z_FAR)/2);
+    b = constrain(b, 0, 1);
+    let v = floor(b * 130);
+    fill(v * 0.93, v * 0.93, v);
+    quad(ftl.x, ftl.y, ftr.x, ftr.y, btr.x, btr.y, btl.x, btl.y);
+
+    // Bright halo on ceiling around the fixture
+    let ceilBulb = roomPt(0.5, 0.0, bulbZ);
+    let ceilEdge = roomPt(0.0, 0.0, bulbZ);
+    let haloRX = abs(ceilBulb.x - ceilEdge.x) * 0.9;
+    let haloRY = haloRX * 0.18;
+    let hSteps = 22;
+    for (let i = hSteps; i >= 0; i--) {
+      let frac = i / hSteps;
+      let alpha = pow(1 - frac, 1.8) * 140 * pulse;
+      fill(255, 255, 240, alpha);
+      ellipse(ceilBulb.x, ceilBulb.y, haloRX * 2 * frac, haloRY * 2 * frac);
+    }
+  }
+
+  // ---- LIGHT CONE (clipped to room using p5 clip path via drawingContext) ----
+  // Build the room silhouette as a clipping path
+  drawingContext.save();
+  drawingContext.beginPath();
+  // Outline of visible room (all 4 corners of the "opening" toward camera)
+  // The room as seen = convex hull of ftl, ftr, fbr, fbl, btl, btr, bbr, bbl
+  // Simpler: clip to the quad that forms the visible room opening
+  // Use the bounding polygon: ceiling front-left, ceiling front-right,
+  // floor front-right, floor front-left (near plane) and far corners
+  // Actually we just need the union of all wall quads = the room interior
+  // Easiest: clip to the outer silhouette of the room
+  let pts = [ftl, ftr, fbr, fbl, bbl, bbr, btr, btl];
+  // Convex hull of these projected pts — just trace them in order that forms hull
+  // For a rectangular room seen in perspective: outline is ftl→ftr→fbr→fbl
+  drawingContext.moveTo(ftl.x, ftl.y);
+  drawingContext.lineTo(ftr.x, ftr.y);
+  drawingContext.lineTo(fbr.x, fbr.y);
+  drawingContext.lineTo(fbl.x, fbl.y);
+  drawingContext.closePath();
+  drawingContext.clip();
+
+  // Now draw the volumetric light cone from bulb downward
+  // Cone apex = bulb position, spreading down to floor
+  let coneApex = bulbPt;
+  let floorCenter = roomPt(0.5, 1.0, bulbZ);
+  let floorLeft   = roomPt(0.18, 1.0, bulbZ);
+  let floorRight  = roomPt(0.82, 1.0, bulbZ);
+  let ceilLeft    = roomPt(0.22, 0.0, bulbZ);
+  let ceilRight   = roomPt(0.78, 0.0, bulbZ);
+
+  // Draw cone as layered ellipses along the beam axis
+  let coneSteps = 55;
+  for (let i = coneSteps; i >= 0; i--) {
+    let frac = i / coneSteps;
+    // frac=0 is apex (ceiling), frac=1 is floor
+    let wy = frac * 1.0; // world y from 0 (ceiling) to 1 (floor)
+    let pt = roomPt(0.5, wy, bulbZ);
+
+    // Cone radius grows as we go down
+    let coneHalfW_world = 0.06 + frac * 0.38;
+    let ptL = roomPt(0.5 - coneHalfW_world, wy, bulbZ);
+    let ptR = roomPt(0.5 + coneHalfW_world, wy, bulbZ);
+    let rx = abs(pt.x - ptL.x);
+    let ry = rx * 0.22;
+
+    // Intensity: bright near top, fades toward floor
+    let intensity = pow(1 - frac * 0.78, 1.6) * pulse;
+    let alpha = intensity * 38;
+    let warm = lerp(255, 235, frac);
+    fill(warm, warm, lerp(248, 210, frac), alpha);
+    ellipse(pt.x, pt.y, rx * 2, ry * 2);
+  }
+
+  // Bright hotspot right at bulb
+  fill(255, 255, 240, 160 * pulse);
+  ellipse(coneApex.x, coneApex.y, 18, 8);
+  fill(255, 255, 255, 200 * pulse);
+  ellipse(coneApex.x, coneApex.y, 8, 4);
+
+  drawingContext.restore();
+
+  // ---- BULB FIXTURE (drawn after clip restore so it's always visible) ----
+  let fixPtL = roomPt(0.44, 0.0, bulbZ);
+  let fixPtR = roomPt(0.56, 0.0, bulbZ);
+  let fixW = abs(fixPtR.x - fixPtL.x);
+  let fixH = fixW * 0.28;
+
+  // Fixture housing
+  fill(80, 80, 78);
+  rectMode(CENTER);
+  rect(bulbPt.x, bulbPt.y - fixH * 0.3, fixW * 1.3, fixH * 0.5, 2);
+
+  // Bulb glow
+  let bulbR = fixW * 0.55;
+  fill(255, 252, 220, 240 * pulse);
+  ellipse(bulbPt.x, bulbPt.y, bulbR, bulbR * 0.7);
+  fill(255, 255, 255, 200 * pulse);
+  ellipse(bulbPt.x, bulbPt.y, bulbR * 0.5, bulbR * 0.35);
+
+  // Cord from ceiling to fixture
+  stroke(60, 60, 58);
+  strokeWeight(1.2);
+  let cordTop = roomPt(0.5, 0.0, bulbZ);
+  line(cordTop.x, cordTop.y, bulbPt.x, bulbPt.y - fixH * 0.5);
+  noStroke();
+}
+
+function windowResized() {
+  resizeCanvas(windowWidth, windowHeight);
+}
+</script>
+</body>
+</html>

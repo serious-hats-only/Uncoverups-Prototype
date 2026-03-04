@@ -1,21 +1,141 @@
 <!DOCTYPE html>
 <html lang="en">
-<link rel="stylesheet" href="css/styles.css">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Uncoverups Prototype</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Uncoverups</title>
+  <link href="https://fonts.googleapis.com/css2?family=Libre+Franklin:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: #000000;
+      color: #ffffff;
+      font-family: 'Libre Franklin', sans-serif;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .top-rule {
+      width: 100%;
+      height: 3px;
+      background: #1a1a1a;
+    }
+
+    .page {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding-top: 25vh;
+      width: 100%;
+      max-width: 520px;
+      padding-left: 24px;
+      padding-right: 24px;
+    }
+
+    .divider {
+      width: 100%;
+      height: 1px;
+      background: #e0e0e0;
+      margin-bottom: 28px;
+    }
+
+    .header {
+      font-family: 'Libre Franklin', sans-serif;
+      font-size: clamp(42px, 8vw, 64px);
+      font-weight: 700;
+      letter-spacing: -0.01em;
+      text-align: center;
+      color: #f8f8f8;
+      line-height: 1;
+      margin-bottom: 12px;
+    }
+
+    .subheader {
+      font-size: clamp(13px, 2vw, 15px);
+      font-weight: 400;
+      color: #acacac;
+      text-align: center;
+      line-height: 1.5;
+      margin-bottom: 36px;
+      max-width: 340px;
+    }
+
+    .divider-bottom {
+      width: 100%;
+      height: 1px;
+      background: #e0e0e0;
+      margin-bottom: 32px;
+    }
+
+    .buttons {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      width: 100%;
+      max-width: 360px;
+    }
+
+    .btn {
+      display: block;
+      width: 100%;
+      padding: 14px 20px;
+      border-radius: 40px;
+      border: 2px solid #1a1a1a;
+      background: #ffffff;
+      color: #1a1a1a;
+      font-family: 'Libre Franklin', sans-serif;
+      font-size: 15px;
+      font-weight: 600;
+      letter-spacing: 0.01em;
+      text-align: center;
+      cursor: pointer;
+      transition: background 0.15s, color 0.15s;
+    }
+
+    .btn:hover {
+      background: #1a1a1a;
+      color: #ffffff;
+    }
+
+    .btn:active { opacity: 0.8; }
+
+    .footer-note {
+      margin-top: 28px;
+      font-size: 13px;
+      color: #9b9b9b;
+      text-align: center;
+    }
+
+    .footer-note a {
+      color: #1a1a1a;
+      text-underline-offset: 2px;
+    }
+  </style>
 </head>
 <body>
-    <center>
-        <p><b><h3>3x3</h3></b></p>
-        <a href="3x3_puzz_1.html">Puzzle 1</a>
-        <p><a href="3x3_puzz_2.html">Puzzle 2</a></p>
-        <p><b><h3>4x3</h3></b></p>
-        <p><a href="4x3_puzz_2.html">Puzzle 2</a></p>
-        <p><a href="4x3_puzz_4.html">Puzzle 4</a></p>
-        <p><b><h3>4x4</h3></b></p>
-        <p><a href="4x4_puzz_2.html">Puzzle 2</a></p>
-    </center>
+
+  <div class="top-rule"></div>
+
+  <div class="page">
+    <img src="images/yarn.png">
+    
+
+    <h1 class="header">Uncoverups</h1>
+    <p class="subheader">Connect related ideas to expose absurd conspiracies</p>
+
+    
+
+    <div class="buttons">
+      <button class="btn"><a href="3x3_puzz_1.html">3x3 Puzzle 1</a></button>
+      <button class="btn"><a href="3x3_puzz_2.html">3x3 Puzzle 2</a></button>
+      <button class="btn"><a href="4x3_puzz_2.html">4x3 Puzzle 1</a></button>
+      <button class="btn"><a href="4x3_puzz_4.html">4x3 Puzzle 2</a></button>
+      <button class="btn"><a href="4x4_puzz_2.html">4x4 Puzzle 1</a></button>
+    </div>
+  </div>
+
 </body>
 </html>

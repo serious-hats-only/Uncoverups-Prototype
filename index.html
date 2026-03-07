@@ -38,7 +38,7 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      padding-top: 25vh;
+      padding-top: 20vh;
       width: 100%;
       max-width: 520px;
       padding-left: 24px;
@@ -87,8 +87,34 @@
       width: 100%;
       max-width: 360px;
     }
+    
+    /*
+      Strategy: the .btn-wrap is the clipping parent.
+      The image is absolutely positioned, starting fully
+      behind the button (translateX(0)), then slides right
+      on hover. overflow:hidden on the wrap clips it until
+      it clears the button edge.
+    */
+
+    .btn-wrap {
+      position: relative;
+      /* extra right padding makes room for the image to slide into */
+      width: 100%;
+
+      /* defaults - overridden in button inline */
+      --slide-x: 0px;
+      --slide-y: 0px;
+      --anchor-left: auto;
+      --anchor-right: 2px;
+      --anchor-top: 2px;
+      --anchor-bottom: auto;
+      --popout-width: 75px;
+      --popout-height: calc(100% - 4px);
+    }
 
     .btn {
+      position: relative;
+      z-index: 2;
       display: block;
       width: 100%;
       padding: 14px 20px;
@@ -111,6 +137,35 @@
     }
 
     .btn:active { opacity: 0.8; }
+
+    /* Image slides out from behind the right side of the button */
+    .popout {
+      position: absolute;
+      top:    var(--anchor-top);
+      bottom: var(--anchor-bottom);
+      left:   var(--anchor-left);
+      right:  var(--anchor-right);
+      width:  var(--popout-width);
+      height: var(--popout-height);
+      border-radius: 0 38px 38px 0;
+      overflow: hidden;
+      z-index: 1;                /* behind button (which is z-index 2) */
+      /* Start: fully hidden under button — translateX(0) */
+      transform: translateX(0px);
+      transition: transform 0.32s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .btn-wrap:hover .popout {
+      transform: translateX(var(--slide-x)) translateY(var(--slide-y)); /* slide directrion and magnitude */
+    }
+
+    .popout img {
+      width: 75%;
+      height: 75%;
+      object-fit: scale-down;
+      display: block;
+      border-radius: 0 38px 38px 0;
+    }
 
     .footer-note {
       margin-top: 28px;
@@ -139,11 +194,56 @@
     
 
     <div class="buttons">
-      <a href="3x3_puzz_1.html"><button class="btn">3x3 Puzzle 1</button></a>
-      <a href="3x3_puzz_2.html"><button class="btn">3x3 Puzzle 2</button></a>
-      <a href="4x3_puzz_2.html"><button class="btn">4x3 Puzzle 1</button></a>
-      <a href="4x3_puzz_4.html"><button class="btn">4x3 Puzzle 2</button></a>
-      <a href="4x4_puzz_2.html"><button class="btn">4x4 Puzzle 1</button></a>
+      <div class="btn-wrap" style="
+        --anchor-right: 2px; --anchor-left: auto;
+        --anchor-top: 2px; --anchor-bottom: auto;
+        --slide-x: 79px; --slide-y: -30px;
+        --popout-radius: 0 38px 38px 0;
+        --popout-width: 75px; --popout-height: calc(100% - 4px);
+          ">
+        <a href="3x3_puzz_1.html"><button class="btn">3x3 Puzzle 1</button></a>
+        <div class="popout"><img src="images/icon_sphere.png"></div>
+      </div>
+      <div class="btn-wrap" style="
+        --anchor-right: auto; --anchor-left: 2px;
+        --anchor-top: 2px; --anchor-bottom: auto;
+        --slide-x: -79px;
+        --popout-radius: 0 38px 38px 0;
+        --popout-width: 75px; --popout-height: calc(100% - 4px);
+        ">
+        <a href="3x3_puzz_2.html"><button class="btn">3x3 Puzzle 2</button></a>
+        <div class="popout"><img src="images/icon_usflag.png"></div>
+      </div>
+      <div class="btn-wrap" style="
+        --anchor-right: 2px; --anchor-left: auto;
+        --anchor-top: 2px; --anchor-bottom: auto;
+        --slide-x: 79px;
+        --popout-radius: 0 38px 38px 0;
+        --popout-width: 75px; --popout-height: calc(100% - 4px);
+        ">
+        <a href="4x3_puzz_2.html"><button class="btn">4x3 Puzzle 1</button></a>
+        <div class="popout"><img src="images/icon_ufo.png"></div>
+      </div>
+      <div class="btn-wrap" style="
+        --anchor-right: auto; --anchor-left: 2px;
+        --anchor-top: 2px; --anchor-bottom: auto;
+        --slide-x: -79px;
+        --popout-radius: 0 38px 38px 0;
+        --popout-width: 75px; --popout-height: calc(100% - 4px);
+        ">
+        <a href="4x3_puzz_4.html"><button class="btn">4x3 Puzzle 2</button></a>
+        <div class="popout"><img src="images/icon_fear.png"></div>
+      </div>
+      <div class="btn-wrap" style="
+        --anchor-right: auto; --anchor-left: 45%;
+        --anchor-top: auto; --anchor-bottom: 2px;
+        --slide-y: 60px;
+        --popout-radius: 0 38px 38px 0;
+        --popout-width: 75px; --popout-height: calc(100% - 4px);
+        ">
+        <a href="4x4_puzz_2.html"><button class="btn">4x4 Puzzle 1</button></a>
+        <div class="popout"><img src="images/icon_boat.png"></div>
+      </div>
     </div>
   </div>
 

@@ -2,7 +2,7 @@
 let items = [
     // Obama
     { text: '43', isImage: false, x: 162, y: 320, group: 'Obama', w: 75, h: 50, label: '43' },
-    { text: 'white house', isImage: true, isURL: true, url:'images/3x3_puzz_2_images/white_house.png', x: 280, y: 145, group: 'Obama', w: 105, h: 105, label: 'white house' },
+    { text: 'white house', isImage: true, isURL: true, url:'images/3x3_puzz_2_images/white_house.png', x: 300, y: 105, group: 'Obama', w: 105, h: 105, label: 'white house' },
     { text: 'hope', isImage: true, isURL: true, url: 'images/3x3_puzz_2_images/hope.png', x: 389, y: 436, group: 'Obama', w: 105, h: 105, label: 'hope' },
     
     // America
@@ -127,7 +127,7 @@ function draw() {
     // White background while texture loads
     background(250);
     }
-
+    /*
     // White box behind title
     fill(255);
     noStroke();
@@ -143,9 +143,9 @@ function draw() {
     textFont('Courier New, monospace'); // Set title font to Courier New
     textSize(62);
     textStyle(BOLD);
-    text('UNCOVERUPS', width / 2, 15);
+    text('UNCOVERUPS', width / 2, 15);*/
     textStyle(NORMAL);
-    textFont('Arial'); // Reset to default font
+    textFont('Libre Franklin'); // Reset to default font
 
     // Draw score and stats
     // fill(0);
@@ -159,7 +159,8 @@ function draw() {
 
     // White box behind tries/hearts section
     fill(255);
-    noStroke();
+    strokeWeight(3);
+    stroke(238, 98, 97);
     let triesBoxWidth = 100;
     let triesBoxHeight = 55;
     let triesBoxX = width - triesBoxWidth - 49;
@@ -170,6 +171,7 @@ function draw() {
     textAlign(LEFT, TOP);
     textSize(14);
     fill(0);
+    noStroke();
     textStyle(BOLD);
     text('Tries:', width - 140, 55);
     textStyle(NORMAL);
@@ -480,9 +482,9 @@ function draw() {
     noStroke();
     textAlign(LEFT, CENTER);
     textSize(16);
-    text('"SMOOTH skin. MINIMAL hair. VERY flexible.', descBoxX + 70, descBoxY + descBoxHeight / 2.8);
-    text('Isn\'t it OBVIOUS???"', descBoxX + 70, descBoxY + descBoxHeight / 2);
-    text('                                                     - E', descBoxX + 70, descBoxY + descBoxHeight / 1.55);
+    text('"SMOOTH skin. MINIMAL hair.', descBoxX + 70, descBoxY + descBoxHeight / 2.8);
+    text(' VERY flexible. Isn\'t it OBVIOUS???"', descBoxX + 70, descBoxY + descBoxHeight / 2);
+    text('                                                     - E', descBoxX + 70, descBoxY + descBoxHeight / 1.45);
     
     // Image box overlapping left side - ROTATED
     let imageBoxSize = 80;

@@ -7,7 +7,7 @@ let items = [
     
     // Circles
     { text: 'moon', isImage: true, isURL: true, url: 'images/3x3_puzz_1_images/moon.png', x: 240, y: 320, group: 'sphere', w: 105, h: 105, label: 'The Moon' },
-    { text: 'sphere_poster', isImage: true, isURL: true, url: 'images/3x3_puzz_1_images/sphere_poster.png', x: 50, y: 130, group: 'sphere', w: 105, h: 105, label: 'Sphere Poster' },
+    { text: 'sphere_poster', isImage: true, isURL: true, url: 'images/3x3_puzz_1_images/sphere_poster.png', x: 75, y: 100, group: 'sphere', w: 105, h: 105, label: 'Sphere Poster' },
     { text: 'Bingo Ball', isImage: false, x: 450, y: 290, group: 'sphere', w: 95, h: 50, label: 'Bingo Ball'},
     
     // Flat
@@ -127,7 +127,7 @@ function draw() {
     // White background while texture loads
     background(250);
     }
-
+    /*
     // White box behind title
     fill(255);
     noStroke();
@@ -143,9 +143,9 @@ function draw() {
     textFont('Courier New, monospace'); // Set title font to Courier New
     textSize(62);
     textStyle(BOLD);
-    text('UNCOVERUPS', width / 2, 15);
+    text('UNCOVERUPS', width / 2, 15);*/
     textStyle(NORMAL);
-    textFont('Arial'); // Reset to default font
+    textFont('Libre Franklin');
 
     // Draw score and stats
     // fill(0);
@@ -159,7 +159,8 @@ function draw() {
 
     // White box behind tries/hearts section
     fill(255);
-    noStroke();
+    strokeWeight(3);
+    stroke(238, 98, 97);
     let triesBoxWidth = 100;
     let triesBoxHeight = 55;
     let triesBoxX = width - triesBoxWidth - 49;
@@ -170,6 +171,7 @@ function draw() {
     textAlign(LEFT, TOP);
     textSize(14);
     fill(0);
+    noStroke();
     textStyle(BOLD);
     text('Tries:', width - 140, 55);
     textStyle(NORMAL);
@@ -481,6 +483,7 @@ function draw() {
     text('"The GLOBAL ELITE want you to believe', descBoxX + 70, descBoxY + descBoxHeight / 2.8);
     text('that certain BIG, bright orbs are completely ', descBoxX + 70, descBoxY + descBoxHeight / 2);
     text('ROUND. To them I say: WANNA BET?"', descBoxX + 70, descBoxY + descBoxHeight / 1.55);
+    text('                                                     - E', descBoxX + 70, descBoxY + descBoxHeight / 1.15);
     
     // Image box overlapping left side - ROTATED
     let imageBoxSize = 80;

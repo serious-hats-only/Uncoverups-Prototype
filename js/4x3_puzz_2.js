@@ -2,7 +2,7 @@
 let items = [
     // Alien
     { text: '\'alien\' poster', isImage: true, isURL: true, url: 'images/4x3_puzz_2_images/alien_poster.png', x: 62, y: 410, group: 'Alien', w: 105, h: 105, label: '\'alien\' poster' },
-    { text: 'ufo', isImage: true, isURL: true, url:'images/4x3_puzz_2_images/ufo.png', x: 280, y: 145, group: 'Alien', w: 105, h: 105, label: 'ufo' },
+    { text: 'ufo', isImage: true, isURL: true, url:'images/4x3_puzz_2_images/ufo.png', x: 280, y: 80, group: 'Alien', w: 105, h: 105, label: 'ufo' },
     { text: 'alf', isImage: true, isURL: true, url: 'images/4x3_puzz_2_images/alf.png', x: 389, y: 436, group: 'Alien', w: 105, h: 105, label: 'alf' },
     
     // Teach
@@ -13,10 +13,10 @@ let items = [
     // Rock
     { text: 'boulder', isImage: true, isURL: true, url: 'images/4x3_puzz_2_images/boulder.png', x: 322, y: 300, group: 'Rock', w: 105, h: 105, label: 'boulder' },
     { text: 'dwayne johnson', isImage: true, isURL: true, url: 'images/4x3_puzz_2_images/dwayne_johnson.png', x: 230, y: 425, group: 'Rock', w: 105, h: 105, label: 'dwayne johnson' },
-    { text: 'Spinal Tap', isImage: false, isURL: false, x: 620, y: 130, group: 'Rock', w: 100, h: 50, label: 'Spinal Tap' },
+    { text: 'Spinal Tap', isImage: false, isURL: false, x: 470, y: 50, group: 'Rock', w: 100, h: 50, label: 'Spinal Tap' },
     
     // Balance
-    { text: 'balance beam', isImage: true, isURL: true, url: 'images/4x3_puzz_2_images/balance_beam.png', x: 480, y: 130, group: 'Balance', w: 105, h: 105, label: 'balance beam' },
+    { text: 'balance beam', isImage: true, isURL: true, url: 'images/4x3_puzz_2_images/balance_beam.png', x: 480, y: 150, group: 'Balance', w: 105, h: 105, label: 'balance beam' },
     { text: 'Work-Life Balance', isImage: false, x: 125, y: 260, group: 'Balance', w: 135, h: 50, label: 'Work-Life Balance' },
     { text: 'scale of justice', isImage: true, isURL: true, url: 'images/4x3_puzz_2_images/scale_of_justice.png', x: 640, y: 275, group: 'Balance', w: 105, h: 105, label: 'scale of justice' },
 ];
@@ -132,7 +132,7 @@ function draw() {
     // White background while texture loads
     background(250);
     }
-
+    /*
     // White box behind title
     fill(255);
     noStroke();
@@ -148,9 +148,9 @@ function draw() {
     textFont('Courier New, monospace'); // Set title font to Courier New
     textSize(62);
     textStyle(BOLD);
-    text('UNCOVERUPS', width / 2, 15);
+    text('UNCOVERUPS', width / 2, 15);*/
     textStyle(NORMAL);
-    textFont('Arial'); // Reset to default font
+    textFont('Libre Franklin'); // Reset to default font
 
     // Draw score and stats
     // fill(0);
@@ -164,7 +164,8 @@ function draw() {
 
     // White box behind tries/hearts section
     fill(255);
-    noStroke();
+    strokeWeight(3);
+    stroke(238, 98, 97);
     let triesBoxWidth = 140;
     let triesBoxHeight = 55;
     let triesBoxX = width - triesBoxWidth - 12;
@@ -175,6 +176,7 @@ function draw() {
     textAlign(LEFT, TOP);
     textSize(14);
     fill(0);
+    noStroke();
     textStyle(BOLD);
     text('Tries:', width - 140, 55);
     textStyle(NORMAL);

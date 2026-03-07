@@ -2,7 +2,7 @@
 let items = [
     // Billiard
     { text: 'pool shark', isImage: true, isURL: true, url: 'images/4x3_puzz_4_images/pool_shark.png', x: 62, y: 410, group: 'Billiard', w: 105, h: 105, label: 'pool shark' },
-    { text: 'billiard balls', isImage: true, isURL: true, url:'images/4x3_puzz_4_images/billiard_balls.png', x: 280, y: 145, group: 'Billiard', w: 105, h: 105, label: 'billiard balls' },
+    { text: 'billiard balls', isImage: true, isURL: true, url:'images/4x3_puzz_4_images/billiard_balls.png', x: 280, y: 95, group: 'Billiard', w: 105, h: 105, label: 'billiard balls' },
     { text: 'Q', isImage: false, x: 389, y: 436, group: 'Billiard', w: 50, h: 50, label: 'Q' },
 
     // Chalk
@@ -12,7 +12,7 @@ let items = [
     
     // Grind
     { text: 'skateboard grind', isImage: true, isURL: true, url: 'images/4x3_puzz_4_images/skateboard_grind.png', x: 500, y: 333, group: 'Grind', w: 105, h: 105, label: 'skateboard grind' },
-    { text: 'meat grinder', isImage: true, isURL: true, url: 'images/4x3_puzz_4_images/meat_grinder.png', x: 50, y: 130, group: 'Grind', w: 105, h: 105, label: 'meat grinder' },
+    { text: 'meat grinder', isImage: true, isURL: true, url: 'images/4x3_puzz_4_images/meat_grinder.png', x: 60, y: 70, group: 'Grind', w: 105, h: 105, label: 'meat grinder' },
     { text: 'Mortar & Pestle', isImage: false, x: 23, y: 330, group: 'Grind', w: 115, h: 50, label: 'Mortar & Pestle' },
     
     // Fear
@@ -132,7 +132,7 @@ function draw() {
     // White background while texture loads
     background(250);
     }
-
+    /*
     // White box behind title
     fill(255);
     noStroke();
@@ -148,9 +148,9 @@ function draw() {
     textFont('Courier New, monospace'); // Set title font to Courier New
     textSize(62);
     textStyle(BOLD);
-    text('UNCOVERUPS', width / 2, 15);
+    text('UNCOVERUPS', width / 2, 15);*/
     textStyle(NORMAL);
-    textFont('Arial'); // Reset to default font
+    textFont('Libre Franklin'); // Reset to default font
 
     // Draw score and stats
     // fill(0);
@@ -164,7 +164,8 @@ function draw() {
 
     // White box behind tries/hearts section
     fill(255);
-    noStroke();
+    strokeWeight(3);
+    stroke(238, 98, 97);
     let triesBoxWidth = 140;
     let triesBoxHeight = 55;
     let triesBoxX = width - triesBoxWidth - 12;
@@ -175,6 +176,7 @@ function draw() {
     textAlign(LEFT, TOP);
     textSize(14);
     fill(0);
+    noStroke();
     textStyle(BOLD);
     text('Tries:', width - 140, 55);
     textStyle(NORMAL);

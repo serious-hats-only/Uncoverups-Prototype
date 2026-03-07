@@ -8,18 +8,18 @@ let items = [
     
     // Lost
     { text: 'lost and found', isImage: true, isURL: true, url: 'images/4x4_puzz_2_images/lost_found.png', x: 500, y: 333, group: 'Lost', w: 105, h: 105, label: 'lost and found' },
-    { text: 'lost in translation', isImage: true, isURL: true, url: 'images/4x4_puzz_2_images/lost_translation.png', x: 50, y: 130, group: 'Lost', w: 105, h: 105, label: 'lost in translation' },
+    { text: 'lost in translation', isImage: true, isURL: true, url: 'images/4x4_puzz_2_images/lost_translation.png', x: 50, y: 60, group: 'Lost', w: 105, h: 105, label: 'lost in translation' },
     { text: '______ Generation', isImage: false, x: 23, y: 330, group: 'Lost', w: 135, h: 50, label: '______ Generation' },
     { text: 'broken compass', isImage: true, isURL: true, url: 'images/4x4_puzz_2_images/broken_compass.png', x: 190, y: 275, group: 'Lost', w: 105, h: 105, label: 'broken compass' },
     
     // Bermuda
     { text: 'bermuda flag', isImage: true, isURL: true, url: 'images/4x4_puzz_2_images/bermuda_flag.png', x: 322, y: 300, group: 'Bermuda', w: 105, h: 105, label: 'bermuda flag' },
     { text: 'bermuda shorts', isImage: true, isURL: true, url: 'images/4x4_puzz_2_images/bermuda_shorts.png', x: 230, y: 425, group: 'Bermuda', w: 105, h: 105, label: 'bermuda shorts' },
-    { text: 'Bermuda Grass', isImage: false, isURL: false, x: 620, y: 130, group: 'Bermuda', w: 125, h: 50, label: 'Bermuda Grass' },
-    { text: 'bermuda island', isImage: true, isURL: true, url: 'images/4x4_puzz_2_images/bermuda_island.png', x: 210, y: 150, group: 'Bermuda', w: 105, h: 105, label: 'bermuda island' },
+    { text: 'Bermuda Grass', isImage: false, isURL: false, x: 340, y: 75, group: 'Bermuda', w: 125, h: 50, label: 'Bermuda Grass' },
+    { text: 'bermuda island', isImage: true, isURL: true, url: 'images/4x4_puzz_2_images/bermuda_island.png', x: 210, y: 90, group: 'Bermuda', w: 105, h: 105, label: 'bermuda island' },
     
     // Triangle
-    { text: 'dorito', isImage: true, isURL: true, url: 'images/4x4_puzz_2_images/dorito.png', x: 480, y: 130, group: 'Triangle', w: 105, h: 105, label: 'dorito' },
+    { text: 'dorito', isImage: true, isURL: true, url: 'images/4x4_puzz_2_images/dorito.png', x: 500, y: 105, group: 'Triangle', w: 105, h: 105, label: 'dorito' },
     { text: 'Pool Rack', isImage: false, x: 50, y: 260, group: 'Triangle', w: 85, h: 50, label: 'Pool Rack' },
     { text: 'Research Triangle', isImage: false, x: 640, y: 320, group: 'Triangle', w: 135, h: 50, label: 'Research Triangle' },
     { text: 'waterski pyramid', isImage: true, isURL: true, url: 'images/4x4_puzz_2_images/ski_pyramid.png', x: 620, y: 205, group: 'Triangle', w: 105, h: 105, label: 'waterski pyramid' }
@@ -136,7 +136,7 @@ function draw() {
     // White background while texture loads
     background(250);
     }
-
+    /*
     // White box behind title
     fill(255);
     noStroke();
@@ -152,9 +152,9 @@ function draw() {
     textFont('Courier New, monospace'); // Set title font to Courier New
     textSize(62);
     textStyle(BOLD);
-    text('UNCOVERUPS', width / 2, 15);
+    text('UNCOVERUPS', width / 2, 15);*/
     textStyle(NORMAL);
-    textFont('Arial'); // Reset to default font
+    textFont('Libre Franklin'); // Reset to default font
 
     // Draw score and stats
     // fill(0);
@@ -168,7 +168,8 @@ function draw() {
 
     // White box behind tries/hearts section
     fill(255);
-    noStroke();
+    strokeWeight(3);
+    stroke(238, 98, 97);
     let triesBoxWidth = 140;
     let triesBoxHeight = 55;
     let triesBoxX = width - triesBoxWidth - 12;
@@ -179,6 +180,7 @@ function draw() {
     textAlign(LEFT, TOP);
     textSize(14);
     fill(0);
+    noStroke();
     textStyle(BOLD);
     text('Tries:', width - 140, 55);
     textStyle(NORMAL);

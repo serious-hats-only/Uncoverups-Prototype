@@ -192,14 +192,6 @@ function draw() {
     }
     }
     
-    // Draw feedback
-    if (feedback && millis() < feedbackTimer && !gameWon && !gameLost) {
-    textAlign(CENTER, TOP);
-    textSize(18);
-    fill(feedback.correct ? color(34, 197, 94) : color(239, 68, 68));
-    text(feedback.message, width / 2, 80);
-    }
-    
     // Draw items
     for (let item of items) {
     let isHovered = isMouseOver(item);
@@ -534,6 +526,23 @@ function draw() {
     }
     
     pop(); // Restore transformation state
+
+    // Draw feedback
+    if (feedback && millis() < feedbackTimer && !gameWon && !gameLost) {
+    fill(255);
+    strokeWeight(3);
+    stroke(0, 0, 0);
+    let feedbackBoxWidth = 250;
+    let feedbackBoxHeight = 40;
+    let feedbackBoxX = (width - feedbackBoxWidth) / 2;
+    let feedbackBoxY = 70;
+    rect(feedbackBoxX, feedbackBoxY, feedbackBoxWidth, feedbackBoxHeight, 8);
+    noStroke();
+    textAlign(CENTER, TOP);
+    textSize(18);
+    fill(feedback.correct ? color(34, 197, 94) : color(239, 68, 68));
+    text(feedback.message, width / 2, 80);
+    }
 }
 
 function mousePressed() {
